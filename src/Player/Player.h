@@ -1,8 +1,9 @@
 #pragma once
 #include "DxLib.h"
 #include "../Input/Input.h"
+#include "../Arrow/arow.h"
 
-const char HEART_PATH[] = {"data/play/lure.png"};		//ハートの画像パス
+const char HEART_PATH[] = {"data/play/kari_heart.png"};		//ハートの画像パス
 const char SHIELD_PATH[] = { "data/play/fishingpowerbar.png" };		//シールドの画像パス
 
 // プレイヤーの画像サイズ
@@ -46,6 +47,9 @@ private:
 	void Invincible();
 
 public:
+	//飛んでくる矢のクラス
+	Arrow arrow;
+
 	//プレイヤーの初期化
 	void Init();
 
