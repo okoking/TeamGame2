@@ -10,7 +10,7 @@ class Play
 {
 private:
 	//クラスの変数宣言
-	Player player;			//プレイヤークラス
+	Player player;
 
 	Collision collision;	//当たり判定
 

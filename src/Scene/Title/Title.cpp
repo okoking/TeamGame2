@@ -34,7 +34,7 @@ void Title::Init()
 	lighting = true;
 
 	//êiçsìx
-	progress = 0;
+	progress = 1;
 
 	//bgm
 	Sound::Bgm::Play(BGM_TITLE);

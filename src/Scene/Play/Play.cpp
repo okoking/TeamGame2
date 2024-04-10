@@ -7,6 +7,9 @@ const char BACKGROUND_PATH[] = { "data/play/backGround.png" };		//プレイシーンの
 //プレイシーンの初期化
 void Play::Init()
 {
+	//プレイヤー関連
+	player.Init();
+
 	//プレイシーンの通常処理に遷移
 	g_CurrentSceneID = SCENE_ID_LOOP_PLAY;
 }
@@ -25,7 +28,7 @@ void Play::Load()
 //プレイシーンの通常処理
 void Play::Step()
 {
-	player.Step();			//プレイヤーの通常処理	
+	player.Step();			//プレイヤーの通常処理
 }
 
 //プレイシーンの描画処理
@@ -56,6 +59,7 @@ void Play::Fin()
 	Sound::Bgm::StopSound(BGM_FISH);
 	Sound::Bgm::StopSound(BGM_FISHING);
 	Sound::Bgm::StopSound(BGM_RECOVERY);
+
 
 	g_CurrentSceneID = SCENE_ID_INIT_RESULT;
 }

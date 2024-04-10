@@ -17,7 +17,7 @@ void Rasult::Init()
 	fade[0] = 0;
 	fade[1] = 0;
 	lighting = false;
-	progress = 0;
+	progress = 1;
 
 	//bgm
 	Sound::Bgm::Play(BGM_RESULT);
