@@ -12,7 +12,7 @@
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
 {
 	//ウィンドウの名前を変える
-	SetMainWindowText("アンダイン");
+	SetMainWindowText("アンダイン戦");
 
 	//ウィンドウの状態を設定する
 	ChangeWindowMode(true);
@@ -105,8 +105,6 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 				play.Init();	//プレイシーン初期化
 
 				play.Load();	//プレイシーンの読み込み
-
-				play.SetDefaultValue();
 
 				break;
 				//プレイシーン通常処理

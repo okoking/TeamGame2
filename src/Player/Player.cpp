@@ -1,11 +1,9 @@
 #include "Player.h"
+#include "../Input/Input.h"
 
 //プレイヤーの初期化
 void Player::Init()
 {
-	//プレイヤーの状態初期化
-	plStatus = Normal;
-
 	//プレイヤーの座標の初期化
 	posX = 0;		//X座標
 	posY = 0;		//Y座標
@@ -20,21 +18,9 @@ void Player::Load()
 	ImageHundle = LoadGraph(PLAYER_PATH);
 }
 
-//プレイヤーの初期値設定
-void Player::SetDefaultValue()
-{
-	//プレイヤーの状態
-	plStatus = Normal;
-
-	//プレイヤーの座標の初期化
-	posX = PLAYER_POS_X;		//X座標
-	posY = PLAYER_POS_Y;		//Y座標
-}
-
 //プレイヤーの通常処理
 void Player::Step()
 {
-
 }
 
 //プレイヤーの描画処理
@@ -54,5 +40,18 @@ void Player::Fin()
 //プレイヤーの操作処理
 void Player::Operation()
 {
+	if (Input::Key::Push(KEY_INPUT_LEFT)) {
+
+	}
+	if (Input::Key::Push(KEY_INPUT_RIGHT)) {
+
+	}
+	if (Input::Key::Push(KEY_INPUT_UP)) {
+
+	}
+	if (Input::Key::Push(KEY_INPUT_DOWN)) {
+
+	}
+
 
 }

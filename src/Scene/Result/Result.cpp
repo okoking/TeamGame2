@@ -2,7 +2,6 @@
 #include"../Result/Result.h"
 #include"../../Scene/Scene.h"
 #include"../../Input/Input.h"
-#include"../../Fish/Fish.h"
 
 
 //初期化
@@ -118,7 +117,7 @@ void Rasult::Draw()
 	DrawFormatString(300, y, GetColor(255, 255, 255), "スコア");
 	//文字の大きさを変更
 	SetFontSize(80);
-	DrawFormatString(400, y + 60, GetColor(255, 255, 255), "%d匹", fish.GetCaughtNum());
+
 	//文字の大きさを元に戻す
 	SetFontSize(20);
 	//表示を元に戻す
