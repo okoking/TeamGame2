@@ -3,15 +3,18 @@
 //‰æ‘œ‚Ìí—Ş
 enum TITLE_IMAGE_NUM
 {
-	TITLE_SKY,	//‹ó
-	TITLE_SEA,	//ŠC
-	TITLE_JETTY,	//V‹´
-	TITLE_CLOUD1,	//‰_1
-	TITLE_CLOUD2,	//‰_2
-	TITLE_CLOUD3,	//‰_3
-	TITLE_CLOUD4,	//‰_4
+	//TITLE_SKY,	//‹ó
+	//TITLE_SEA,	//ŠC
+	//TITLE_JETTY,	//V‹´
+	//TITLE_CLOUD1,	//‰_1
+	//TITLE_CLOUD2,	//‰_2
+	//TITLE_CLOUD3,	//‰_3
+	//TITLE_CLOUD4,	//‰_4
 	TITLE_TITLE,	//ƒ^ƒCƒgƒ‹
-	TITLE_START,	//“ü—Í‘Ò‚¿
+	//TITLE_START,	//“ü—Í‘Ò‚¿
+	TITLE_GEAR1,	//•Ô
+	TITLE_GEAR2,
+	TITLE_GEAR3,
 
 	TITLE_IMAGE_MAX_NUM,	//‰æ‘œ”
 };
@@ -19,15 +22,12 @@ enum TITLE_IMAGE_NUM
 //‰æ‘œƒpƒX
 const char TITLE_IMAGE_PATH[TITLE_IMAGE_MAX_NUM][255] =
 {
-	"data/title/sky.png",	//‹ó
-	"data/title/sea.png",	//ŠC
-	"data/title/jetty.png",	//V‹´
-	"data/title/cloud1.png",	//‰_1
-	"data/title/cloud2.png",	//‰_2
-	"data/title/cloud3.png",	//‰_3
-	"data/title/cloud4.png",	//‰_4
-	"data/title/title.png",	//ƒ^ƒCƒgƒ‹
-	"data/title/start.png",	//“ü—Í‘Ò‚¿
+	"data/title/back.png",	//ƒ^ƒCƒgƒ‹
+	"data/title/gear1.png",	//•Ô1
+	"data/title/gear2.png",	//•Ô2
+	"data/title/gear3.png",	//•Ô3
+	
+	//"data/title/start.png",	//“ü—Í‘Ò‚¿
 };
 
 class Title
@@ -35,17 +35,19 @@ class Title
 private:
 	int imageHandle[TITLE_IMAGE_MAX_NUM];	//‰æ‘œƒnƒ“ƒhƒ‹
 
-	float seaY;	//ŠC‚x
-	float jettyY;	//V‹´‚x
-	float cloudX[4][2];	//‰_‚w
-	float cloudY;	//‰_‚w
-	float titleY;	//ƒ^ƒCƒgƒ‹‚x
+	//float seaY;	//ŠC‚x
+	//float jettyY;	//V‹´‚x
+	//float cloudX[4][2];	//‰_‚w
+	//float cloudY;	//‰_‚w
+	//float titleY;	//ƒ^ƒCƒgƒ‹‚x
 
-	int fade[2];	//“§–¾“xFƒ^ƒCƒgƒ‹ “ü—Í‘Ò‚¿
+	//int fade[2];	//“§–¾“xFƒ^ƒCƒgƒ‹ “ü—Í‘Ò‚¿
 
-	bool lighting;	//“ü—Í‘Ò‚¿‚Ì“_–Å
+	//bool lighting;	//“ü—Í‘Ò‚¿‚Ì“_–Å
 
 	int progress;	//is“x
+
+	float gearAngle;	//•Ô‚Ì‰ñ“]
 
 public:
 
