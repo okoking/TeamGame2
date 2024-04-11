@@ -26,8 +26,6 @@ void Player::Init()
 	invincibletimeCnt = PLAYER_INVINCIBLE_TIME; // 無敵時間カウント用
 	isDraw = true;								// 描画されているか
 	Cr= GetColor(0, 255, 0);					// 緑色をセット
-
-	arrow.Init();
 }
 
 //プレイヤーの読み込み処理
@@ -46,10 +44,6 @@ void Player::Step()
 	// 無敵時間処理
 	Invincible();
 
-	//矢
-	arrow.IsShot(0,300);
-	arrow.Move();
-
 	if (Input::Key::Push(KEY_INPUT_RETURN)) {
 		//プレイシーンの終了処理に遷移
 		g_CurrentSceneID = SCENE_ID_FIN_PLAY;
@@ -64,9 +58,6 @@ void Player::Step()
 //プレイヤーの描画処理
 void Player::Draw()
 {
-	//矢
-	arrow.Draw();
-
 	if (isDraw) { // 描画されている判定なら
 		DrawRotaGraph((int)HeartposX, (int)HeartposY, 1.0f, 0.0f, HeartImageHundle, true); // ハート
 	}

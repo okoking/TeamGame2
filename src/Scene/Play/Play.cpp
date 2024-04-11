@@ -10,6 +10,9 @@ void Play::Init()
 	//プレイヤー関連
 	player.Init();
 
+	// 矢
+	arrow.Init();
+
 	//プレイシーンの通常処理に遷移
 	g_CurrentSceneID = SCENE_ID_LOOP_PLAY;
 }
@@ -23,12 +26,18 @@ void Play::Load()
 	
 	//プレイヤー関連
 	player.Load();									//プレイヤー画像の読み込み
+
+	// 矢
+	arrow.Load();
+
 }
 
 //プレイシーンの通常処理
 void Play::Step()
 {
 	player.Step();			//プレイヤーの通常処理
+
+	arrow.Step();			// 矢の通常処理
 }
 
 //プレイシーンの描画処理
@@ -38,6 +47,7 @@ void Play::Draw()
 	//DrawGraph(0, 0, backgroundHandle, true);	//背景
 
 	player.Draw();		//プレイヤー画像の描画
+	arrow.Draw();		//矢の描画
 
 	//文字の大きさを変更
 	SetFontSize(20);
@@ -51,7 +61,7 @@ void Play::Draw()
 void Play::Fin()
 {
 	player.Fin();		//プレイヤーの終了処理
-
+	arrow.Fin();		//矢終了処理
 	//gem
 	Sound::Bgm::StopSound(BGM_PLAY);
 	Sound::Bgm::StopSound(BGM_SEA);
