@@ -1,63 +1,129 @@
 #include "DxLib.h"
 #include "arow.h"
 #include "../Collision/Collision.h"
-Arrow::Arrow() {}
+#include "../Player/Player.h"
+#include "../Scene/Scene.h"
+
+// コンストラクタ
+Arrow::Arrow() 
+{
+	for (int ArrowIndex = 0; ArrowIndex < ARROW_MAX_NUM; ArrowIndex++) {
+		for (int ArrowType = 0; ArrowType < ARROW_TYPE_NUM; ArrowType++) {
+			arrowInfo[ArrowIndex].handle[ArrowType] = -1;
+		}
+
+		arrowInfo[ArrowIndex].x = 0;
+		arrowInfo[ArrowIndex].y = 0;
+		arrowInfo[ArrowIndex].isUse = false;
+
+		arrowInfo[ArrowIndex].angle = ARROW_ANGLE_RIGHT;
+		arrowInfo[ArrowIndex].arrowtype = ARROW_TYPE_NORMAL;
+	}
+}
 Arrow::~Arrow() {}
 
 
-// 弾初期化
+// 矢初期化
 void Arrow::Init()
 {
-	for (int i = 0; i < BULLET_MAX_NUM; i++) {
-		arrowInfo[i].handle = LoadGraph("data/play/kari_arrow.png");
-		arrowInfo[i].x = 0;
-		arrowInfo[i].y = 0;
-		arrowInfo[i].isUse = false;
+	for (int  ArrowIndex = 0; ArrowIndex < ARROW_MAX_NUM; ArrowIndex++) {
+		for (int ArrowType = 0; ArrowType < ARROW_TYPE_NUM; ArrowType++) {
+			arrowInfo[ArrowIndex].handle[ArrowType] = 0;
+		}
+
+		arrowInfo[ArrowIndex].x = 0;
+		arrowInfo[ArrowIndex].y = 0;
+		arrowInfo[ArrowIndex].isUse = false;
+
+		arrowInfo[ArrowIndex].angle = ARROW_ANGLE_RIGHT;
+		arrowInfo[ArrowIndex].arrowtype = ARROW_TYPE_NORMAL;
 	}
 }
 
-// 弾発射処理
-bool Arrow::IsShot(int shotPosX, int shotPosY)
+// データロード
+void Arrow::Load()
 {
-	for (int i = 0; i < BULLET_MAX_NUM; i++) {
+	for (int i = 0; i < ARROW_MAX_NUM; i++) {
+		arrowInfo[i].handle[ARROW_TYPE_NORMAL] = LoadGraph("data/play/kari_arrow.png");
+	}
+}
+
+// 矢発射処理
+void Arrow::IsShot()
+{
+	for (int i = 0; i < ARROW_MAX_NUM; i++) {
 		if (!arrowInfo[i].isUse) {
 			// 左右上下から出現
-			// 弾座標の初期位置に設定
-			arrowInfo[i].x = shotPosX;
-			arrowInfo[i].y = shotPosY;
-			arrowInfo[i].isUse = true;
+			// 矢座標の初期位置に設定
+			// 矢の発射方向に対応した値を入れる
 
-			// 発射成功
-			return true;
+			if (arrowInfo[i].angle == ARROW_ANGLE_RIGHT) {
+				arrowInfo[i].x = 0;
+				arrowInfo[i].y = HEART_INIT_POS_Y;
+			}
+			if (arrowInfo[i].angle == ARROW_ANGLE_DOWN) {
+				arrowInfo[i].x = HEART_INIT_POS_X;
+				arrowInfo[i].y = 0;
+			}
+			if (arrowInfo[i].angle == ARROW_ANGLE_LEFT) {
+				arrowInfo[i].x = SCREEN_SIZE_X;
+				arrowInfo[i].y = HEART_INIT_POS_Y;
+			}
+			if (arrowInfo[i].angle == ARROW_ANGLE_UP) {
+				arrowInfo[i].x = HEART_INIT_POS_X;
+				arrowInfo[i].y = SCREEN_SIZE_Y;
+			}
+
+			arrowInfo[i].isUse = true;
 		}
 	}
-
-	// 発射失敗
-	return false;
 }
 
-// 弾の移動処理
+// 矢の移動処理
 void Arrow::Move()
 {
-	for (int i = 0; i < BULLET_MAX_NUM; i++) {
+	for (int i = 0; i < ARROW_MAX_NUM; i++) {
 		if (arrowInfo[i].isUse) {
-			// 弾が使用中なら移動させる
-			arrowInfo[i].x += 3;
-
-			// ハートに当たったら未使用に戻すIsHitRect使う
-			if (Collision::Rect(326,225,148,149, arrowInfo[i].x, arrowInfo[i].y,108,56)) {
-				arrowInfo[i].isUse = false;
+			// 矢が使用中なら移動させる
+			// 矢の発射方向に対応した値を入れる
+			if (arrowInfo[i].angle == ARROW_ANGLE_RIGHT) {
+				arrowInfo[i].x += ARROW_SPEED;
+			}
+			if (arrowInfo[i].angle == ARROW_ANGLE_DOWN) {
+				arrowInfo[i].y += ARROW_SPEED;
+			}
+			if (arrowInfo[i].angle == ARROW_ANGLE_LEFT) {
+				arrowInfo[i].x -= ARROW_SPEED;
+			}
+			if (arrowInfo[i].angle == ARROW_ANGLE_UP) {
+				arrowInfo[i].y -= ARROW_SPEED;
 			}
 		}
 	}
 }
 
-// 弾の描画
+// 矢の通常処理
+void Arrow::Step()
+{
+	// 矢発射処理
+	IsShot();
+
+	// 矢の移動処理
+	Move();
+}
+
+// 矢の描画
 void Arrow::Draw()
 {
-	for (int i = 0; i < BULLET_MAX_NUM; i++) {
+	for (int i = 0; i < ARROW_MAX_NUM; i++) {
 		if (arrowInfo[i].isUse) {
-			DrawGraph(arrowInfo[i].x+(i*2), arrowInfo[i].y, arrowInfo[i].handle, true);
+			DrawRotaGraph((int)arrowInfo[i].x, (int)arrowInfo[i].y, 1.0f, 
+				arrowInfo[i].angle * 3.14 / 2, arrowInfo[i].handle[arrowInfo[i].arrowtype], true);
 		}
 	}
+}
+
+// 矢終了処理
+void Arrow::Fin()
+{
 }
