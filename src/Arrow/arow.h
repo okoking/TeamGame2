@@ -1,11 +1,11 @@
 #pragma once
 #include "../Player/Player.h"
 
-#define ARROW_MAX_NUM	(2)						//矢の最大数（ハンドルの数）
+#define ARROW_MAX_NUM	(5)						//矢の最大数（ハンドルの数）
 
 // 矢の速度
-const float ARROW_SPEED = 4.0f;
-const int ARROW_MAX_INTERVAL = 180;
+const float ARROW_SPEED = 5.0f;
+const int ARROW_MAX_INTERVAL = 120;
 
 // 矢の種類
 enum ARROW_TYPE {
@@ -26,10 +26,15 @@ enum ARROW_ANGLE {
 
 // 矢の画像ファイルパス
 const char NORMALARROW_PATH[] = { "data/play/kari_arrow.png" };
+const char REDARROW_PATH[] = { "data/play/kari_arrow2.png" };
+const char YELLOWARROW_PATH[] = { "data/play/kari_arrow1.png" };
 
 // 画像サイズ
-const float ARROW_SIZE_X = 64;
+const float ARROW_SIZE_X = 128;
 const float ARROW_SIZE_Y = 32;
+
+// 同時に発射されない猶予
+const int RECOVERY_MAX_FRAME = 20;
 
 struct ArrowInfo
 {
@@ -47,6 +52,7 @@ class Arrow
 {
 private:
 	ArrowInfo arrowInfo[ARROW_MAX_NUM] = { 0 };
+	int Recoverycnt;	// 同時に発射されないようにする
 
 public:
 	Arrow();

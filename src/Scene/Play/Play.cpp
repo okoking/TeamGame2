@@ -84,7 +84,7 @@ void Play::ArrowCollision(SHIELD_ANGLE ShieldAngle)
 			// èÇ
 			if (arrow.GetArrowAngle(ArrowIndex) == ARROW_ANGLE_RIGHT) {
 				if (ShieldAngle == ARROW_ANGLE_RIGHT) {
-					if (arrow.GetPosX(ArrowIndex) - ARROW_SIZE_X / 2 < HEART_INIT_POS_X + HEART_SIZE + SHIELD_HEIGHT / 2 + 16) {
+					if (arrow.GetPosX(ArrowIndex) - ARROW_SIZE_X / 2 < HEART_INIT_POS_X + HEART_SIZE + SHIELD_HEIGHT / 2) {
 						arrow.ResetArrow(ArrowIndex);
 						arrow.SetUse(ArrowIndex, false);
 						continue;
@@ -93,7 +93,7 @@ void Play::ArrowCollision(SHIELD_ANGLE ShieldAngle)
 			}
 			if (arrow.GetArrowAngle(ArrowIndex) == ARROW_ANGLE_DOWN) {
 				if (ShieldAngle == ARROW_ANGLE_DOWN) {
-					if (arrow.GetPosY(ArrowIndex) - ARROW_SIZE_X / 2 < HEART_INIT_POS_Y + HEART_SIZE + SHIELD_HEIGHT / 2 + 16) {
+					if (arrow.GetPosY(ArrowIndex) - ARROW_SIZE_X / 2 < HEART_INIT_POS_Y + HEART_SIZE + SHIELD_HEIGHT / 2) {
 						arrow.ResetArrow(ArrowIndex);
 						arrow.SetUse(ArrowIndex, false);
 						continue;
@@ -102,7 +102,7 @@ void Play::ArrowCollision(SHIELD_ANGLE ShieldAngle)
 			}
 			if (arrow.GetArrowAngle(ArrowIndex) == ARROW_ANGLE_LEFT) {
 				if (ShieldAngle == ARROW_ANGLE_LEFT) {
-					if (arrow.GetPosX(ArrowIndex) + ARROW_SIZE_X / 2 > HEART_INIT_POS_X - HEART_SIZE - SHIELD_HEIGHT / 2 - 16) {
+					if (arrow.GetPosX(ArrowIndex) + ARROW_SIZE_X / 2 > HEART_INIT_POS_X - HEART_SIZE - SHIELD_HEIGHT / 2) {
 						arrow.ResetArrow(ArrowIndex);
 						arrow.SetUse(ArrowIndex, false);
 						continue;
@@ -111,7 +111,7 @@ void Play::ArrowCollision(SHIELD_ANGLE ShieldAngle)
 			}
 			if (arrow.GetArrowAngle(ArrowIndex) == ARROW_ANGLE_UP) {
 				if (ShieldAngle == ARROW_ANGLE_UP) {
-					if (arrow.GetPosY(ArrowIndex) + ARROW_SIZE_X / 2 > HEART_INIT_POS_Y - HEART_SIZE - SHIELD_HEIGHT / 2 - 16) {
+					if (arrow.GetPosY(ArrowIndex) + ARROW_SIZE_X / 2 > HEART_INIT_POS_Y - HEART_SIZE - SHIELD_HEIGHT / 2) {
 						arrow.ResetArrow(ArrowIndex);
 						arrow.SetUse(ArrowIndex, false);
 						continue;

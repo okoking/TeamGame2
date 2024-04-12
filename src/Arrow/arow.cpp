@@ -20,6 +20,8 @@ Arrow::Arrow()
 		arrowInfo[ArrowIndex].angle = ARROW_ANGLE_UP;
 		arrowInfo[ArrowIndex].arrowtype = ARROW_TYPE_NORMAL;
 	}
+	// 同時に発射されないようにする
+	Recoverycnt = -1;
 }
 Arrow::~Arrow() {}
 
@@ -39,8 +41,10 @@ void Arrow::Init()
 		arrowInfo[ArrowIndex].angle = (ARROW_ANGLE)GetRand(3);
 		arrowInfo[ArrowIndex].ShotInterval = GetRand(ARROW_MAX_INTERVAL);
 
-		arrowInfo[ArrowIndex].arrowtype = ARROW_TYPE_NORMAL;
+		arrowInfo[ArrowIndex].arrowtype = (ARROW_TYPE)GetRand(2);
 	}
+	// 同時に発射されないようにする
+	Recoverycnt = RECOVERY_MAX_FRAME;
 }
 
 // データロード
@@ -48,6 +52,8 @@ void Arrow::Load()
 {
 	for (int i = 0; i < ARROW_MAX_NUM; i++) {
 		arrowInfo[i].handle[ARROW_TYPE_NORMAL] = LoadGraph(NORMALARROW_PATH);
+		arrowInfo[i].handle[ARROW_TYPE_RED] = LoadGraph(REDARROW_PATH);
+		arrowInfo[i].handle[ARROW_TYPE_YELLOW] = LoadGraph(YELLOWARROW_PATH);
 	}
 }
 
@@ -59,14 +65,13 @@ void Arrow::IsShot()
 			// 左右上下から出現
 			// 矢座標の初期位置に設定
 			// 矢の発射方向に対応した値を入れる
-
 			if (arrowInfo[i].angle == ARROW_ANGLE_LEFT) {
 				arrowInfo[i].x = 0;
 				arrowInfo[i].y = HEART_INIT_POS_Y;
 			}
 			if (arrowInfo[i].angle == ARROW_ANGLE_UP) {
 				arrowInfo[i].x = HEART_INIT_POS_X;
-				arrowInfo[i].y = 0;
+				arrowInfo[i].y = HEART_INIT_POS_Y - HEART_INIT_POS_X;
 			}
 			if (arrowInfo[i].angle == ARROW_ANGLE_RIGHT) {
 				arrowInfo[i].x = SCREEN_SIZE_X;
@@ -74,14 +79,20 @@ void Arrow::IsShot()
 			}
 			if (arrowInfo[i].angle == ARROW_ANGLE_DOWN) {
 				arrowInfo[i].x = HEART_INIT_POS_X;
-				arrowInfo[i].y = SCREEN_SIZE_Y;
+				arrowInfo[i].y = HEART_INIT_POS_Y + HEART_INIT_POS_X;
 			}
 
 			arrowInfo[i].ShotInterval++;
 
+			Recoverycnt++;
+
 			if (arrowInfo[i].ShotInterval > ARROW_MAX_INTERVAL) {
-				arrowInfo[i].ShotInterval = ARROW_MAX_INTERVAL;
-				arrowInfo[i].isUse = true;
+				if (Recoverycnt > RECOVERY_MAX_FRAME) {
+					Recoverycnt = 0;
+
+					arrowInfo[i].ShotInterval = ARROW_MAX_INTERVAL;
+					arrowInfo[i].isUse = true;
+				}
 			}
 		}
 	}
@@ -145,7 +156,7 @@ void Arrow::Fin()
 void Arrow::ResetArrow(int _index)
 {
 	arrowInfo[_index].angle = (ARROW_ANGLE)GetRand(3);
+	arrowInfo[_index].arrowtype = (ARROW_TYPE)GetRand(2);
 
 	arrowInfo[_index].ShotInterval = GetRand(ARROW_MAX_INTERVAL);
-
 }
