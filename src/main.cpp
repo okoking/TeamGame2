@@ -5,14 +5,14 @@
 #include "Input/Input.h"			//入力機能
 #include "Scene/Scene.h"			//シーン関連
 #include "Scene/Title/Title.h"		//タイトル
-#include "Scene/Play/Play.h"
+#include "Scene/Play/Play.h"		//プレイ
 #include "Scene/Result/Result.h"	//リザルト
 
 // Win32アプリケーションは WinMain関数 から始まる
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
 {
 	//ウィンドウの名前を変える
-	SetMainWindowText("アンダイン戦");
+	SetMainWindowText("アン〇イン戦");
 
 	//ウィンドウの状態を設定する
 	ChangeWindowMode(true);

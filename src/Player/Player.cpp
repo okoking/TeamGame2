@@ -13,7 +13,8 @@ void Player::Init()
 	ShieldposY = HEART_INIT_POS_Y - HEART_SIZE;		//Y座標
 
 	// シールドの角度初期化
-	Shieldangle = 90.0f;
+	Shieldangle = 270.0f;
+	CurrentShieldangle = SHIELD_ANGLE_UP;
 
 	//プレイヤーの画像ハンドルの初期化
 	HeartImageHundle = -1;
@@ -84,22 +85,26 @@ void Player::Operation()
 	if (Input::Key::Push(KEY_INPUT_LEFT)) {
 		ShieldposX = HeartposX - HEART_SIZE;
 		ShieldposY = HeartposY;
+		CurrentShieldangle = SHIELD_ANGLE_LEFT;
 		Shieldangle = 180.0f;
 	}
 	if (Input::Key::Push(KEY_INPUT_RIGHT)) {
 		ShieldposX = HeartposX + HEART_SIZE;
 		ShieldposY = HeartposY;
+		CurrentShieldangle = SHIELD_ANGLE_RIGHT;
 		Shieldangle = 0.0f;
 	}
 	if (Input::Key::Push(KEY_INPUT_UP)) {
 		ShieldposX = HeartposX;
 		ShieldposY = HeartposY - HEART_SIZE;
-		Shieldangle = 90.0f;
+		CurrentShieldangle = SHIELD_ANGLE_UP;
+		Shieldangle = 270.0f;
 	}
 	if (Input::Key::Push(KEY_INPUT_DOWN)) {
 		ShieldposX = HeartposX;
 		ShieldposY = HeartposY + HEART_SIZE;
-		Shieldangle = 270.0f;
+		CurrentShieldangle = SHIELD_ANGLE_DOWN;
+		Shieldangle = 90.0f;
 	}
 }
 
@@ -149,7 +154,7 @@ void Player::Invincible()
 		invincibletimeCnt = PLAYER_INVINCIBLE_TIME;
 	}
 
-	if (invincibletimeCnt % 12 < 6) {
+	if (invincibletimeCnt % 9 < 4) {
 		isDraw = true; // 描画されているにする
 	}
 }

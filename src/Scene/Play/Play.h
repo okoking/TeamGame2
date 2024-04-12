@@ -32,4 +32,7 @@ public:
 
 	//プレイシーンの終了処理
 	void Fin();
+
+	// 矢の当たり判定
+	void ArrowCollision(SHIELD_ANGLE ShieldAngle);
 };
