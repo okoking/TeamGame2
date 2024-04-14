@@ -53,35 +53,7 @@ void Title::Step()
 	{
 	case 0:	//画面作り
 
-		////海
-		//if (seaY <= 0)
-		//{
-		//	seaY = 0;
-		//}
-		//else
-		//{
-		//	seaY -= 1.4f;
-		//}
-
-		////桟橋
-		//if (jettyY <= 0)
-		//{
-		//	jettyY = 0;
-		//}
-		//else
-		//{
-		//	jettyY -= 1.2f;
-		//}
-
-		////タイトル透明度
-		//if (fade[0] >= 255)
-		//{
-		//	fade[0] = 255;
-		//}
-		//else
-		//{
-		//	fade[0] += 1;
-		//}
+		
 
 		//タイトル
 		/*if (titleY >= 0)
@@ -185,10 +157,15 @@ void Title::Step()
 void Title::Draw()
 {
 	DrawGraph(0, 0, imageHandle[TITLE_TITLE], true);	//タイトル下地
-	DrawRotaGraph(0, 20,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR1], true);	//タイトル下地
-	DrawRotaGraph(100, 40,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR2], true);	//タイトル下地
-	DrawRotaGraph(200, 60,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	//タイトル下地
+	DrawRotaGraph(-122, -106,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR1], true);
+	DrawRotaGraph(-42, 410,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR2], true);	
+	DrawRotaGraph(578, 673,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR2], true);	
+	DrawRotaGraph(-42, 410,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	
+	DrawRotaGraph(34, 512,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	
+	DrawRotaGraph(92, 429,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	
 
+	DrawRotaGraph(578, 672,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	
+	DrawRotaGraph(733, 556,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	
 	
 	////雲
 	//for (int i = 0; i < 4; i++)

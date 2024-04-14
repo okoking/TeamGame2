@@ -3,13 +3,7 @@
 //‰æ‘œ‚ÌŽí—Þ
 enum TITLE_IMAGE_NUM
 {
-	//TITLE_SKY,	//‹ó
-	//TITLE_SEA,	//ŠC
-	//TITLE_JETTY,	//ŽV‹´
-	//TITLE_CLOUD1,	//‰_1
-	//TITLE_CLOUD2,	//‰_2
-	//TITLE_CLOUD3,	//‰_3
-	//TITLE_CLOUD4,	//‰_4
+	
 	TITLE_TITLE,	//ƒ^ƒCƒgƒ‹
 	//TITLE_START,	//“ü—Í‘Ò‚¿
 	TITLE_GEAR1,	//Ž•ŽÔ
@@ -22,7 +16,7 @@ enum TITLE_IMAGE_NUM
 //‰æ‘œƒpƒX
 const char TITLE_IMAGE_PATH[TITLE_IMAGE_MAX_NUM][255] =
 {
-	"data/title/back.png",	//ƒ^ƒCƒgƒ‹
+	"data/title/title.png",	//ƒ^ƒCƒgƒ‹
 	"data/title/gear1.png",	//Ž•ŽÔ1
 	"data/title/gear2.png",	//Ž•ŽÔ2
 	"data/title/gear3.png",	//Ž•ŽÔ3
