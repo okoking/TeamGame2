@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "../Input/Input.h"
 #include "../Scene/Scene.h"
+int Score;
 
 //プレイヤーの初期化
 void Player::Init()
@@ -22,6 +23,9 @@ void Player::Init()
 
 	// HP
 	Hp = PLAYER_HP;
+
+	// ガード成功数
+	GuardCnt = 0;
 
 	isActive = true;							// プレイヤーが生きているか
 	invincibletimeCnt = PLAYER_INVINCIBLE_TIME; // 無敵時間カウント用
@@ -76,6 +80,9 @@ void Player::Fin()
 
 	// シールド画像削除
 	DeleteGraph(ShieldImageHundle);
+
+	Score = GuardCnt;
+
 }
 
 //プレイヤーの操作処理

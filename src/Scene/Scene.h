@@ -24,5 +24,7 @@ enum SCENE_ID
 
 };
 
+extern int Score;
+
 extern SCENE_ID g_CurrentSceneID;
 

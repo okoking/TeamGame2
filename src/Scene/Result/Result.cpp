@@ -2,7 +2,7 @@
 #include"../Result/Result.h"
 #include"../../Scene/Scene.h"
 #include"../../Input/Input.h"
-
+#include"../Play/Play.h"
 
 //初期化
 void Rasult::Init()
@@ -112,9 +112,9 @@ void Rasult::Draw()
 
 	////fadeで透明度変更
 	//SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade[0]);
-	////文字の大きさを変更
-	//SetFontSize(60);
-	//DrawFormatString(300, y, GetColor(255, 255, 255), "スコア");
+	//文字の大きさを変更
+	SetFontSize(60);
+	DrawFormatString(200, 310, GetColor(0, 0, 0), "スコア:%d", Score);
 	////文字の大きさを変更
 	//SetFontSize(80);
 

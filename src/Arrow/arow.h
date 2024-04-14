@@ -1,11 +1,12 @@
 #pragma once
 #include "../Player/Player.h"
 
-#define ARROW_MAX_NUM	(5)						//矢の最大数（ハンドルの数）
+#define ARROW_MAX_NUM	(3)						//矢の最大数（ハンドルの数）
 
 // 矢の速度
-const float ARROW_SPEED = 5.0f;
-const int ARROW_MAX_INTERVAL = 120;
+const float ARROW_SPEED = 4.0f;
+const int ARROW_MAX_INTERVAL = 120; // 次の矢が出てくるまでの間隔
+const int INVERSION_FRAME = 50; // 発射されてから反転するまでのフレーム
 
 // 矢の種類
 enum ARROW_TYPE {
@@ -30,7 +31,7 @@ const char REDARROW_PATH[] = { "data/play/kari_arrow2.png" };
 const char YELLOWARROW_PATH[] = { "data/play/kari_arrow1.png" };
 
 // 画像サイズ
-const float ARROW_SIZE_X = 128;
+const float ARROW_SIZE_X = 48;
 const float ARROW_SIZE_Y = 32;
 
 // 同時に発射されない猶予
@@ -46,6 +47,11 @@ struct ArrowInfo
 	float xspeed, yspeed;	// 移動速度
 	int ShotInterval;	// 発射間隔
 	bool isUse;		//使用中フラグ
+	bool isInversion; // 矢反転中フラグ
+	bool isInversioned; // 回転終了確認フラグ
+	int InversionCnt; // 反転角度カウント用
+	int ShotTimeCnt; // 発射されてからのフレームカウント用
+	float InversionAngle; // 反転中回転しているしている角度
 };
 
 class Arrow
@@ -96,4 +102,10 @@ public:
 
 	// 矢のランダム要素をリセット
 	void ResetArrow(int _index);
+
+	// 矢の種類取得用
+	ARROW_TYPE GetArrowType(int _index) { return arrowInfo[_index].arrowtype; }
+
+	// 回転中フラグ取得用
+	bool GetisInversion(int _index){return arrowInfo[_index].isInversion;}
 };

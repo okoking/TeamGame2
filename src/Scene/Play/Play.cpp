@@ -55,6 +55,10 @@ void Play::Draw()
 	SetFontSize(20);
 	//操作説明を書く
 	DrawFormatString(20, 465, GetColor(255, 255, 255), "来る方向に盾を向けろ");
+	DrawFormatString(20, 485, GetColor(255, 255, 255), "赤い矢は防ぐな");
+	DrawFormatString(20, 505, GetColor(255, 255, 255), "後は雰囲気でなんとかしろ");
+	DrawFormatString(20, 545, GetColor(255, 255, 255), "ガード成功数:%d",player.GetGuradCnt());
+
 	//文字の大きさを元に戻す
 	SetFontSize(20);
 }
@@ -65,13 +69,7 @@ void Play::Fin()
 	player.Fin();		//プレイヤーの終了処理
 	arrow.Fin();		//矢終了処理
 	//gem
-	Sound::Bgm::StopSound(BGM_PLAY);
-	Sound::Bgm::StopSound(BGM_SEA);
-
-	Sound::Bgm::StopSound(BGM_FISH);
-	Sound::Bgm::StopSound(BGM_FISHING);
-	Sound::Bgm::StopSound(BGM_RECOVERY);
-	
+	Sound::Bgm::StopSound(BGM_PLAY);	
 
 	g_CurrentSceneID = SCENE_ID_INIT_RESULT;
 }
@@ -80,11 +78,18 @@ void Play::Fin()
 void Play::ArrowCollision(SHIELD_ANGLE ShieldAngle)
 {
 	for (int ArrowIndex = 0; ArrowIndex < ARROW_MAX_NUM; ArrowIndex++) {
-		if (arrow.IsUse(ArrowIndex)) {
+		if (arrow.IsUse(ArrowIndex) && !arrow.GetisInversion(ArrowIndex)) {
 			// 盾
 			if (arrow.GetArrowAngle(ArrowIndex) == ARROW_ANGLE_RIGHT) {
 				if (ShieldAngle == ARROW_ANGLE_RIGHT) {
 					if (arrow.GetPosX(ArrowIndex) - ARROW_SIZE_X / 2 < HEART_INIT_POS_X + HEART_SIZE + SHIELD_HEIGHT / 2) {
+						if (arrow.GetArrowType(ArrowIndex) == ARROW_TYPE_RED) {
+							// ダメージ処理
+							player.Damaged();
+						}
+						else {
+							player.AddGuardCnt();
+						}
 						arrow.ResetArrow(ArrowIndex);
 						arrow.SetUse(ArrowIndex, false);
 						continue;
@@ -94,6 +99,13 @@ void Play::ArrowCollision(SHIELD_ANGLE ShieldAngle)
 			if (arrow.GetArrowAngle(ArrowIndex) == ARROW_ANGLE_DOWN) {
 				if (ShieldAngle == ARROW_ANGLE_DOWN) {
 					if (arrow.GetPosY(ArrowIndex) - ARROW_SIZE_X / 2 < HEART_INIT_POS_Y + HEART_SIZE + SHIELD_HEIGHT / 2) {
+						if (arrow.GetArrowType(ArrowIndex) == ARROW_TYPE_RED) {
+							// ダメージ処理
+							player.Damaged();
+						}
+						else {
+							player.AddGuardCnt();
+						}
 						arrow.ResetArrow(ArrowIndex);
 						arrow.SetUse(ArrowIndex, false);
 						continue;
@@ -103,6 +115,13 @@ void Play::ArrowCollision(SHIELD_ANGLE ShieldAngle)
 			if (arrow.GetArrowAngle(ArrowIndex) == ARROW_ANGLE_LEFT) {
 				if (ShieldAngle == ARROW_ANGLE_LEFT) {
 					if (arrow.GetPosX(ArrowIndex) + ARROW_SIZE_X / 2 > HEART_INIT_POS_X - HEART_SIZE - SHIELD_HEIGHT / 2) {
+						if (arrow.GetArrowType(ArrowIndex) == ARROW_TYPE_RED) {
+							// ダメージ処理
+							player.Damaged();
+						}
+						else {
+							player.AddGuardCnt();
+						}
 						arrow.ResetArrow(ArrowIndex);
 						arrow.SetUse(ArrowIndex, false);
 						continue;
@@ -112,6 +131,13 @@ void Play::ArrowCollision(SHIELD_ANGLE ShieldAngle)
 			if (arrow.GetArrowAngle(ArrowIndex) == ARROW_ANGLE_UP) {
 				if (ShieldAngle == ARROW_ANGLE_UP) {
 					if (arrow.GetPosY(ArrowIndex) + ARROW_SIZE_X / 2 > HEART_INIT_POS_Y - HEART_SIZE - SHIELD_HEIGHT / 2) {
+						if (arrow.GetArrowType(ArrowIndex) == ARROW_TYPE_RED) {
+							// ダメージ処理
+							player.Damaged();
+						}
+						else {
+							player.AddGuardCnt();
+						}
 						arrow.ResetArrow(ArrowIndex);
 						arrow.SetUse(ArrowIndex, false);
 						continue;
@@ -122,44 +148,61 @@ void Play::ArrowCollision(SHIELD_ANGLE ShieldAngle)
 			// ハート
 			if (arrow.GetArrowAngle(ArrowIndex) == ARROW_ANGLE_RIGHT) {
 				if (arrow.GetPosX(ArrowIndex) - ARROW_SIZE_X / 2 < HEART_INIT_POS_X + HEART_SIZE) {
-					if (ShieldAngle != ARROW_ANGLE_RIGHT) {
-						// ダメージ処理
+					if (arrow.GetArrowType(ArrowIndex) != ARROW_TYPE_RED) {
+						// 赤以外ダメージ処理
 						player.Damaged();
-						arrow.ResetArrow(ArrowIndex);
-						arrow.SetUse(ArrowIndex, false);
 					}
+					else {
+						player.AddGuardCnt();
+					}
+					arrow.ResetArrow(ArrowIndex);
+					arrow.SetUse(ArrowIndex, false);
+					continue;
 				}
 			}
 			if (arrow.GetArrowAngle(ArrowIndex) == ARROW_ANGLE_DOWN) {
 				if (arrow.GetPosY(ArrowIndex) - ARROW_SIZE_X / 2 < HEART_INIT_POS_Y + HEART_SIZE) {
-					if (ShieldAngle != ARROW_ANGLE_DOWN) {
-						// ダメージ処理
+					if (arrow.GetArrowType(ArrowIndex) != ARROW_TYPE_RED) {
+						// 赤以外ダメージ処理
 						player.Damaged();
-						arrow.ResetArrow(ArrowIndex);
-						arrow.SetUse(ArrowIndex, false);
 					}
+					else {
+						player.AddGuardCnt();
+					}
+					arrow.ResetArrow(ArrowIndex);
+					arrow.SetUse(ArrowIndex, false);
+					continue;
 				}
 			}
 			if (arrow.GetArrowAngle(ArrowIndex) == ARROW_ANGLE_LEFT) {
 				if (arrow.GetPosX(ArrowIndex) + ARROW_SIZE_X / 2 > HEART_INIT_POS_X - HEART_SIZE) {
-					if (ShieldAngle != ARROW_ANGLE_LEFT) {
-						// ダメージ処理
+					if (arrow.GetArrowType(ArrowIndex) != ARROW_TYPE_RED) {
+						// 赤以外ダメージ処理
 						player.Damaged();
-						arrow.ResetArrow(ArrowIndex);
-						arrow.SetUse(ArrowIndex, false);
 					}
+					else {
+						player.AddGuardCnt();
+					}
+					arrow.ResetArrow(ArrowIndex);
+					arrow.SetUse(ArrowIndex, false);
+					continue;
 				}
 			}
 			if (arrow.GetArrowAngle(ArrowIndex) == ARROW_ANGLE_UP) {
 				if (arrow.GetPosY(ArrowIndex) + ARROW_SIZE_X / 2 > HEART_INIT_POS_Y - HEART_SIZE) {
-					if (ShieldAngle != ARROW_ANGLE_UP) {
-						// ダメージ処理
+					if (arrow.GetArrowType(ArrowIndex) != ARROW_TYPE_RED) {
+						// 赤以外ダメージ処理
 						player.Damaged();
-						arrow.ResetArrow(ArrowIndex);
-						arrow.SetUse(ArrowIndex, false);
 					}
+					else {
+						player.AddGuardCnt();
+					}
+					arrow.ResetArrow(ArrowIndex);
+					arrow.SetUse(ArrowIndex, false);
+					continue;
 				}
 			}
+			
 		}
 	}
 }

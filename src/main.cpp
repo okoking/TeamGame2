@@ -31,6 +31,7 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 	//-----------------------------------------
 	//一番最初に１回だけやる処理をここに書く
+	Score = 0;
 	g_CurrentSceneID = SCENE_ID_INIT_TITLE;		//シーンID
 
 	//シーンクラス宣言

@@ -3,6 +3,7 @@
 #include "../Collision/Collision.h"
 #include "../Player/Player.h"
 #include "../Scene/Scene.h"
+#include "math.h"
 
 // コンストラクタ
 Arrow::Arrow() 
@@ -19,6 +20,8 @@ Arrow::Arrow()
 
 		arrowInfo[ArrowIndex].angle = ARROW_ANGLE_UP;
 		arrowInfo[ArrowIndex].arrowtype = ARROW_TYPE_NORMAL;
+		arrowInfo[ArrowIndex].isInversion = false; // 矢反転中フラグ
+		arrowInfo[ArrowIndex].isInversioned = false;
 	}
 	// 同時に発射されないようにする
 	Recoverycnt = -1;
@@ -39,9 +42,14 @@ void Arrow::Init()
 		arrowInfo[ArrowIndex].isUse = false;
 
 		arrowInfo[ArrowIndex].angle = (ARROW_ANGLE)GetRand(3);
+
 		arrowInfo[ArrowIndex].ShotInterval = GetRand(ARROW_MAX_INTERVAL);
 
 		arrowInfo[ArrowIndex].arrowtype = (ARROW_TYPE)GetRand(2);
+
+		arrowInfo[ArrowIndex].isInversion = false; // 矢反転中フラグ
+		arrowInfo[ArrowIndex].ShotTimeCnt = 0;
+		arrowInfo[ArrowIndex].InversionAngle = 0; // 反転中回転しているしている角度
 	}
 	// 同時に発射されないようにする
 	Recoverycnt = RECOVERY_MAX_FRAME;
@@ -66,20 +74,20 @@ void Arrow::IsShot()
 			// 矢座標の初期位置に設定
 			// 矢の発射方向に対応した値を入れる
 			if (arrowInfo[i].angle == ARROW_ANGLE_LEFT) {
-				arrowInfo[i].x = 0;
+				arrowInfo[i].x = HEART_INIT_POS_X - HEART_INIT_POS_Y;
 				arrowInfo[i].y = HEART_INIT_POS_Y;
 			}
 			if (arrowInfo[i].angle == ARROW_ANGLE_UP) {
 				arrowInfo[i].x = HEART_INIT_POS_X;
-				arrowInfo[i].y = HEART_INIT_POS_Y - HEART_INIT_POS_X;
+				arrowInfo[i].y = 0;
 			}
 			if (arrowInfo[i].angle == ARROW_ANGLE_RIGHT) {
-				arrowInfo[i].x = SCREEN_SIZE_X;
+				arrowInfo[i].x = HEART_INIT_POS_X + HEART_INIT_POS_Y;
 				arrowInfo[i].y = HEART_INIT_POS_Y;
 			}
 			if (arrowInfo[i].angle == ARROW_ANGLE_DOWN) {
 				arrowInfo[i].x = HEART_INIT_POS_X;
-				arrowInfo[i].y = HEART_INIT_POS_Y + HEART_INIT_POS_X;
+				arrowInfo[i].y = HEART_INIT_POS_Y + HEART_INIT_POS_Y;
 			}
 
 			arrowInfo[i].ShotInterval++;
@@ -102,8 +110,8 @@ void Arrow::IsShot()
 void Arrow::Move()
 {
 	for (int i = 0; i < ARROW_MAX_NUM; i++) {
-		if (arrowInfo[i].isUse) {
-			// 矢が使用中なら移動させる
+		if (arrowInfo[i].isUse && !arrowInfo[i].isInversion) {
+			// 矢が使用中かつ反転中じゃないなら移動させる
 			// 矢の発射方向に対応した値を入れる
 			if (arrowInfo[i].angle == ARROW_ANGLE_LEFT) {
 				arrowInfo[i].x += ARROW_SPEED;
@@ -116,6 +124,51 @@ void Arrow::Move()
 			}
 			if (arrowInfo[i].angle == ARROW_ANGLE_DOWN) {
 				arrowInfo[i].y -= ARROW_SPEED;
+			}
+
+			arrowInfo[i].ShotTimeCnt++;
+
+			if (arrowInfo[i].ShotTimeCnt > INVERSION_FRAME) {
+				arrowInfo[i].ShotTimeCnt = INVERSION_FRAME;
+			}
+		}
+
+		// 矢が黄色なら
+		if (arrowInfo[i].arrowtype == ARROW_TYPE_YELLOW) {
+			if (arrowInfo[i].ShotTimeCnt == INVERSION_FRAME) {
+				// 矢の発射方向に対応するように矢を移動させる
+				if(!arrowInfo[i].isInversioned)
+					arrowInfo[i].isInversion = true;
+			}
+		}
+
+		// 矢反転フラグがONなら
+		if (arrowInfo[i].isInversion) {
+			arrowInfo[i].InversionAngle += 9.0f;
+			arrowInfo[i].x = HEART_INIT_POS_X + cosf(((arrowInfo[i].angle) * 90 + arrowInfo[i].InversionAngle) * 3.14 / 180) * 120;
+			arrowInfo[i].y = HEART_INIT_POS_Y + sinf(((arrowInfo[i].angle) * 90 + arrowInfo[i].InversionAngle) * 3.14 / 180) * 120;
+
+			if (arrowInfo[i].InversionAngle > 180.0f) {
+				// 矢の向きを変更する
+				if (arrowInfo[i].angle == ARROW_ANGLE_LEFT) {
+					arrowInfo[i].angle = ARROW_ANGLE_RIGHT;
+					arrowInfo[i].y = HEART_INIT_POS_Y;
+				}
+				else if (arrowInfo[i].angle == ARROW_ANGLE_UP) {
+					arrowInfo[i].angle = ARROW_ANGLE_DOWN;
+					arrowInfo[i].x = HEART_INIT_POS_X;
+				}
+				else if (arrowInfo[i].angle == ARROW_ANGLE_RIGHT) {
+					arrowInfo[i].angle = ARROW_ANGLE_LEFT;
+					arrowInfo[i].y = HEART_INIT_POS_Y;
+				}
+				else if (arrowInfo[i].angle == ARROW_ANGLE_DOWN) {
+					arrowInfo[i].angle = ARROW_ANGLE_UP;
+					arrowInfo[i].x = HEART_INIT_POS_X;
+				}
+				arrowInfo[i].InversionAngle = 0.0f;
+				arrowInfo[i].isInversioned = true;
+				arrowInfo[i].isInversion = false;
 			}
 		}
 	}
@@ -137,7 +190,7 @@ void Arrow::Draw()
 	for (int i = 0; i < ARROW_MAX_NUM; i++) {
 		if (arrowInfo[i].isUse) {
 			DrawRotaGraph((int)arrowInfo[i].x, (int)arrowInfo[i].y, 1.0f, 
-				(arrowInfo[i].angle + 2) * 3.14 / 2, arrowInfo[i].handle[arrowInfo[i].arrowtype], true);
+				((arrowInfo[i].angle + 2) * 90 + arrowInfo[i].InversionAngle) * 3.14 / 180, arrowInfo[i].handle[arrowInfo[i].arrowtype], true);
 		}
 	}
 }
@@ -159,4 +212,8 @@ void Arrow::ResetArrow(int _index)
 	arrowInfo[_index].arrowtype = (ARROW_TYPE)GetRand(2);
 
 	arrowInfo[_index].ShotInterval = GetRand(ARROW_MAX_INTERVAL);
+	arrowInfo[_index].ShotTimeCnt = 0;
+	arrowInfo[_index].InversionAngle = 0.0f;
+
+	arrowInfo[_index].isInversioned = false;
 }

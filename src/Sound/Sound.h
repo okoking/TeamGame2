@@ -7,22 +7,12 @@ enum BGM_TYPE
 	BGM_PLAY,	//プレイ画面
 	BGM_RESULT,	//リザルト画面
 
-	//環境音
-	BGM_FISH,		//魚が暴れる
-	BGM_FISHING,	//釣り中
-	BGM_RECOVERY,	//ルアー巻き取り
-	BGM_SEA,		//海
-
 	BGM_MAX_NUM
 };
 
 enum SE_TYPE
 {
 	SE_SYSTEM,		//システム
-	SE_FISHING_ROD,	//釣り竿
-	SE_LURE,		//ルアー着水
-	SE_HIT,			//魚がルアーに反応
-	SE_FISH_GET,	//魚を釣った
 	SE_TIME_LIMIT,	//時間制限
 	SE_FINISH,		//ゲーム終了
 

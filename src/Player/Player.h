@@ -48,6 +48,9 @@ private:
 	// HPバーの色保存用
 	unsigned int Cr;
 
+	// ガード成功数
+	int GuardCnt;
+
 	//プレイヤー操作処理
 	void Operation();
 
@@ -75,4 +78,10 @@ public:
 
 	// 盾の向き取得用
 	SHIELD_ANGLE GetShieldAngle() { return CurrentShieldangle; }
+
+	// ガード数加算
+	void AddGuardCnt() { GuardCnt++; };
+
+	// ガード数取得用
+	int GetGuradCnt() { return GuardCnt; }
 };
