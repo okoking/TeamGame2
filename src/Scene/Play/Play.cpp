@@ -3,7 +3,7 @@
 
 //画像パス
 const char BACKGROUND_PATH[] = { "data/play/backGround.png" };		//プレイシーンの背景画像のパス
-const char ENEMY_PATH[] = { "data/play/Move1.png" };		//プレイシーンの背景画像のパス
+const char ENEMY_PATH[] = { "data/play/Move1.png" };				//プレイシーンの背景画像のパス
 
 //プレイシーンの初期化
 void Play::Init()
@@ -14,6 +14,9 @@ void Play::Init()
 	// 矢
 	arrow.Init();
 
+	//音
+	Sound::Bgm::Play(BGM_PLAY);
+	
 	//プレイシーンの通常処理に遷移
 	g_CurrentSceneID = SCENE_ID_LOOP_PLAY;
 }
@@ -26,6 +29,7 @@ void Play::Load()
 	backgroundHandle = LoadGraph(BACKGROUND_PATH);	//背景
 	enemyhandle = LoadGraph(ENEMY_PATH);	//敵
 	ImgHP = LoadGraph("data/play/HP.png");
+	img_sikaku = LoadGraph("data/play/sikaku.png");
 	//プレイヤー関連
 	player.Load();									//プレイヤー画像の読み込み
 
@@ -48,8 +52,6 @@ void Play::Step()
 void Play::Draw()
 {
 	//背景描画
-	//DrawGraph(0, 0, backgroundHandle, true);	//背景
-	//DrawGraph(0, 0, ImgHP, true);
 	DrawGraph(500, 0, enemyhandle, true);
 
 	DrawLineBox(HEART_INIT_POS_X - HEART_INIT_POS_Y, 0, HEART_INIT_POS_X + HEART_INIT_POS_Y, HEART_INIT_POS_Y + HEART_INIT_POS_Y,
@@ -65,6 +67,8 @@ void Play::Draw()
 	DrawFormatString(20, 485, GetColor(255, 255, 255), "赤い矢は防ぐな");
 	DrawFormatString(20, 505, GetColor(255, 255, 255), "後は雰囲気でなんとかしろ");
 	DrawFormatString(20, 545, GetColor(255, 255, 255), "ガード成功数:%d",player.GetGuradCnt());
+	
+	DrawRotaGraph(400, 300, 1.0f, 0.0f, img_sikaku, true);
 	
 	//文字の大きさを元に戻す
 	SetFontSize(20);

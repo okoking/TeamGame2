@@ -18,25 +18,6 @@ void Title::Init()
 		imageHandle[i] = LoadGraph(TITLE_IMAGE_PATH[i]);
 	}
 
-	////座標の設定
-	//seaY = 200;
-	//jettyY = 200;
-
-	//titleY =  - 100;
-
-	//for (int i = 0; i < 4; i++)
-	//{
-	//	cloudX[i][0] = 0;
-	//	cloudX[i][1] = SCREEN_SIZE_X;
-	//}
-	//cloudY = -20;
-
-	//透明度設定
-	//fade[0] = 0;
-
-	//進行
-	progress = 1;
-
 	//bgm
 	Sound::Bgm::Play(BGM_TITLE);
 
@@ -53,76 +34,59 @@ void Title::Init()
 //通常処理
 void Title::Step()
 {
-	switch (progress)
+	//現れる
+	if (lighting)
 	{
-	case 0:	//画面作り
+		fade[1] += 5;
 
-
-		break;
-
-	case 1:	//入力待ち
-
-		//UIの点滅
-		//現れる
-		if (lighting)
+		if (fade[1] >= 255)
 		{
-			fade[1] += 5;
-
-			if (fade[1] >= 255)
-			{
-				lighting = false;
-			}
+			lighting = false;
 		}
-		//消える
-		else
+	}
+	//消える
+	else
+	{
+		fade[1] -= 5;
+
+		if (fade[1] <= 0)
 		{
-			fade[1] -= 5;
-
-			if (fade[1] <= 0)
-			{
-				lighting = true;
-			}
+			lighting = true;
 		}
-
-		gearAngle+=0.1f;
-		
-
-		//スペースキーで画面変化
-		if (Input::Key::Push(KEY_INPUT_SPACE))
-		{
-			//se
-			Sound::Se::Play(SE_SYSTEM);
-
-			//終了処理へ
-			g_CurrentSceneID = SCENE_ID_FIN_TITLE;
-		}
-
-		//矢印キーで状態変化
-		if (g_GameModeID != GAME_MODE_EASY) {
-			if (Input::Key::Push(KEY_INPUT_LEFT))
-			{
-				if(g_GameModeID== GAME_MODE_HARD)
-					g_GameModeID= GAME_MODE_NORMAL;
-				else
-					g_GameModeID = GAME_MODE_EASY;
-			}
-		}
-		if (g_GameModeID != GAME_MODE_HARD) {
-			if (Input::Key::Push(KEY_INPUT_RIGHT))
-			{
-				if (g_GameModeID == GAME_MODE_EASY)
-					g_GameModeID = GAME_MODE_NORMAL;
-				else
-					g_GameModeID = GAME_MODE_HARD;
-			}
-		}
-		break;
-
-
-	default:
-		break;
 	}
 
+	gearAngle+=0.1f;
+		
+
+	//スペースキーで画面変化
+	if (Input::Key::Push(KEY_INPUT_SPACE))
+	{
+		//se
+		Sound::Se::Play(SE_SYSTEM);
+
+		//終了処理へ
+		g_CurrentSceneID = SCENE_ID_FIN_TITLE;
+	}
+
+	//矢印キーで状態変化
+	if (g_GameModeID != GAME_MODE_EASY) {
+		if (Input::Key::Push(KEY_INPUT_LEFT))
+		{
+			if(g_GameModeID== GAME_MODE_HARD)
+				g_GameModeID= GAME_MODE_NORMAL;
+			else
+				g_GameModeID = GAME_MODE_EASY;
+		}
+	}
+	if (g_GameModeID != GAME_MODE_HARD) {
+		if (Input::Key::Push(KEY_INPUT_RIGHT))
+		{
+			if (g_GameModeID == GAME_MODE_EASY)
+				g_GameModeID = GAME_MODE_NORMAL;
+			else
+				g_GameModeID = GAME_MODE_HARD;
+		}
+	}
 	
 }
 

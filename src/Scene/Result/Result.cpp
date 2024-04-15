@@ -12,11 +12,6 @@ void Rasult::Init()
 		//画像読み込み
 		imageHandle[i] = LoadGraph(RESULT_IMAGE_PATH[i]);
 	}
-
-	/*y = 0;
-	fade[0] = 0;
-	fade[1] = 0;
-	lighting = false;*/
 	progress = 1;
 
 	//bgm
@@ -29,31 +24,14 @@ void Rasult::Init()
 //通常処理
 void Rasult::Step()
 {
-	switch (progress)
+	//左クリックで以下
+	if (Input::Key::Push(KEY_INPUT_SPACE))
 	{
-	case 0:	//スコア表示
+		//se
+		Sound::Se::Play(SE_SYSTEM);
 
-
-		break;
-
-	case 1:	//入力待ち
-
-
-		//左クリックで以下
-		if (Input::Key::Push(KEY_INPUT_SPACE))
-		{
-			//se
-			Sound::Se::Play(SE_SYSTEM);
-
-			//終了処理へ
-			g_CurrentSceneID = SCENE_ID_FIN_RESULT;
-		}
-
-		break;
-
-		
-	default:
-		break;
+		//終了処理へ
+		g_CurrentSceneID = SCENE_ID_FIN_RESULT;
 	}
 	
 }
@@ -69,7 +47,6 @@ void Rasult::Draw()
 	DrawFormatString(500, 300, GetColor(255, 255, 255), "%d", Score);
 	////文字の大きさを変更
 	//SetFontSize(80);
-
 	
 }
 

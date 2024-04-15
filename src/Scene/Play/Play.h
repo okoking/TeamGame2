@@ -18,6 +18,7 @@ private:
 	int backgroundHandle;	//背景画像ハンドル
 	int enemyhandle;
 	int ImgHP;
+	int img_sikaku;
 
 public:
 	//プレイシーンの初期化
