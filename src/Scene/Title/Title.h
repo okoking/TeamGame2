@@ -9,6 +9,7 @@ enum TITLE_IMAGE_NUM
 	TITLE_GEAR1,	//歯車
 	TITLE_GEAR2,
 	TITLE_GEAR3,
+	TITLE_LINE,		//線
 
 	TITLE_IMAGE_MAX_NUM,	//画像数
 };
@@ -16,10 +17,11 @@ enum TITLE_IMAGE_NUM
 //画像パス
 const char TITLE_IMAGE_PATH[TITLE_IMAGE_MAX_NUM][255] =
 {
-	"data/title/title.png",	//タイトル
+	"data/title/title2.png",	//タイトル
 	"data/title/gear1.png",	//歯車1
 	"data/title/gear2.png",	//歯車2
 	"data/title/gear3.png",	//歯車3
+	"data/title/sen.png",	//線
 	
 	//"data/title/start.png",	//入力待ち
 };
@@ -42,6 +44,10 @@ private:
 	int progress;	//進行度
 
 	float gearAngle;	//歯車の回転
+	float lineX;		//タイトル下の線
+	float lineY;		//タイトル下の線
+	float lineW;		//タイトル下の線
+	float lineH;		//タイトル下の線
 
 public:
 
