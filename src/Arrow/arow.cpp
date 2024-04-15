@@ -8,7 +8,7 @@
 // コンストラクタ
 Arrow::Arrow() 
 {
-	for (int ArrowIndex = 0; ArrowIndex < ARROW_MAX_NUM; ArrowIndex++) {
+	for (int ArrowIndex = 0; ArrowIndex < ARROW_MAX_NUM - (int)g_GameModeID; ArrowIndex++) {
 		for (int ArrowType = 0; ArrowType < ARROW_TYPE_NUM; ArrowType++) {
 			arrowInfo[ArrowIndex].handle[ArrowType] = -1;
 		}
@@ -32,7 +32,7 @@ Arrow::~Arrow() {}
 // 矢初期化
 void Arrow::Init()
 {
-	for (int  ArrowIndex = 0; ArrowIndex < ARROW_MAX_NUM; ArrowIndex++) {
+	for (int  ArrowIndex = 0; ArrowIndex < ARROW_MAX_NUM - (int)g_GameModeID; ArrowIndex++) {
 		for (int ArrowType = 0; ArrowType < ARROW_TYPE_NUM; ArrowType++) {
 			arrowInfo[ArrowIndex].handle[ArrowType] = 0;
 		}
@@ -60,7 +60,7 @@ void Arrow::Init()
 // データロード
 void Arrow::Load()
 {
-	for (int i = 0; i < ARROW_MAX_NUM; i++) {
+	for (int i = 0; i < ARROW_MAX_NUM - (int)g_GameModeID; i++) {
 		arrowInfo[i].handle[ARROW_TYPE_NORMAL] = LoadGraph(NORMALARROW_PATH);
 		arrowInfo[i].handle[ARROW_TYPE_RED] = LoadGraph(REDARROW_PATH);
 		arrowInfo[i].handle[ARROW_TYPE_YELLOW] = LoadGraph(YELLOWARROW_PATH);
@@ -70,7 +70,7 @@ void Arrow::Load()
 // 矢発射処理
 void Arrow::IsShot()
 {
-	for (int i = 0; i < ARROW_MAX_NUM; i++) {
+	for (int i = 0; i < ARROW_MAX_NUM - (int)g_GameModeID; i++) {
 		if (!arrowInfo[i].isUse) {
 			// 左右上下から出現
 			// 矢座標の初期位置に設定
@@ -111,7 +111,7 @@ void Arrow::IsShot()
 // 矢の移動処理
 void Arrow::Move()
 {
-	for (int i = 0; i < ARROW_MAX_NUM; i++) {
+	for (int i = 0; i < ARROW_MAX_NUM - (int)g_GameModeID; i++) {
 		if (arrowInfo[i].isUse && !arrowInfo[i].isInversion) {
 			// 矢が使用中かつ反転中じゃないなら移動させる
 			// 矢の発射方向に対応した値を入れる
@@ -189,7 +189,7 @@ void Arrow::Step()
 // 矢の描画
 void Arrow::Draw()
 {
-	for (int i = 0; i < ARROW_MAX_NUM; i++) {
+	for (int i = 0; i < ARROW_MAX_NUM - (int)g_GameModeID; i++) {
 		if (arrowInfo[i].isUse) {
 			DrawRotaGraph((int)arrowInfo[i].x, (int)arrowInfo[i].y, 1.0f, 
 				((arrowInfo[i].angle + 2) * 90 + arrowInfo[i].InversionAngle) * 3.14 / 180, arrowInfo[i].handle[arrowInfo[i].arrowtype], true);
@@ -200,7 +200,7 @@ void Arrow::Draw()
 // 矢終了処理
 void Arrow::Fin()
 {
-	for (int ArrowIndex = 0; ArrowIndex < ARROW_MAX_NUM; ArrowIndex++) {
+	for (int ArrowIndex = 0; ArrowIndex < ARROW_MAX_NUM - (int)g_GameModeID; ArrowIndex++) {
 		for (int ArrowType = 0; ArrowType < ARROW_TYPE_NUM; ArrowType++) {
 			DeleteGraph(arrowInfo[ArrowIndex].handle[ArrowType]);
 		}
