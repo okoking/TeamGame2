@@ -3,6 +3,7 @@
 
 //画像パス
 const char BACKGROUND_PATH[] = { "data/play/backGround.png" };		//プレイシーンの背景画像のパス
+const char ENEMY_PATH[] = { "data/play/Move1.png" };		//プレイシーンの背景画像のパス
 
 //プレイシーンの初期化
 void Play::Init()
@@ -23,6 +24,7 @@ void Play::Load()
 	//画像読み込み
 	//背景関連
 	backgroundHandle = LoadGraph(BACKGROUND_PATH);	//背景
+	enemyhandle = LoadGraph(ENEMY_PATH);	//敵
 	ImgHP = LoadGraph("data/play/HP.png");
 	//プレイヤー関連
 	player.Load();									//プレイヤー画像の読み込み
@@ -48,6 +50,10 @@ void Play::Draw()
 	//背景描画
 	//DrawGraph(0, 0, backgroundHandle, true);	//背景
 	//DrawGraph(0, 0, ImgHP, true);
+	DrawGraph(500, 0, enemyhandle, true);
+
+	DrawLineBox(HEART_INIT_POS_X - HEART_INIT_POS_Y, 0, HEART_INIT_POS_X + HEART_INIT_POS_Y, HEART_INIT_POS_Y + HEART_INIT_POS_Y,
+		GetColor(255, 255, 255));
 
 	player.Draw();		//プレイヤー画像の描画
 	arrow.Draw();		//矢の描画
@@ -59,7 +65,7 @@ void Play::Draw()
 	DrawFormatString(20, 485, GetColor(255, 255, 255), "赤い矢は防ぐな");
 	DrawFormatString(20, 505, GetColor(255, 255, 255), "後は雰囲気でなんとかしろ");
 	DrawFormatString(20, 545, GetColor(255, 255, 255), "ガード成功数:%d",player.GetGuradCnt());
-
+	
 	//文字の大きさを元に戻す
 	SetFontSize(20);
 }
@@ -69,6 +75,7 @@ void Play::Fin()
 {
 	player.Fin();		//プレイヤーの終了処理
 	arrow.Fin();		//矢終了処理
+	DeleteGraph(enemyhandle);	// 敵画像処理
 	//gem
 	Sound::Bgm::StopSound(BGM_PLAY);	
 

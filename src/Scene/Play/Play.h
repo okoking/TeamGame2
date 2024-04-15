@@ -16,6 +16,7 @@ private:
 	Arrow arrow;	// –î
 
 	int backgroundHandle;	//”wŒi‰æ‘œƒnƒ“ƒhƒ‹
+	int enemyhandle;
 	int ImgHP;
 
 public:
