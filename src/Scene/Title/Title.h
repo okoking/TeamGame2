@@ -5,10 +5,11 @@ enum TITLE_IMAGE_NUM
 {
 	
 	TITLE_TITLE,	//タイトル
-	//TITLE_START,	//入力待ち
+	TITLE_START,	//入力待ち
 	TITLE_GEAR1,	//歯車
 	TITLE_GEAR2,
 	TITLE_GEAR3,
+	TITLE_GEARHARF,
 	TITLE_LINE,		//線
 	TITLE_EASY,		//easy
 	TITLE_NORMAL,	//normal
@@ -21,9 +22,11 @@ enum TITLE_IMAGE_NUM
 const char TITLE_IMAGE_PATH[TITLE_IMAGE_MAX_NUM][255] =
 {
 	"data/title/title2.png",	//タイトル
+	"data/title/push.png",	//入力待ち
 	"data/title/gear1.png",	//歯車1
 	"data/title/gear2.png",	//歯車2
 	"data/title/gear3.png",	//歯車3
+	"data/title/gear2herf .png",	//歯車3
 	"data/title/sen.png",	//線
 	
 	"data/title/easy.png",	//easy
@@ -44,9 +47,9 @@ private:
 	//float cloudY;	//雲Ｘ
 	//float titleY;	//タイトルＹ
 
-	//int fade[2];	//透明度：タイトル 入力待ち
+	int fade[2];	//透明度：タイトル 入力待ち
 
-	//bool lighting;	//入力待ちの点滅
+	bool lighting;	//入力待ちの点滅
 
 	int progress;	//進行度
 
