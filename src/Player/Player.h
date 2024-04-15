@@ -3,7 +3,8 @@
 #include "../Input/Input.h"
 
 const char HEART_PATH[] = {"data/play/kari_heart2.png"};		//ハートの画像パス
-const char SHIELD_PATH[] = { "data/play/fishingpowerbar.png" };		//シールドの画像パス
+const char SHIELD_PATH[] = { "data/play/shield.png" };		//シールドの画像パス
+const char HP_PATH[] = { "data/play/HP.png" };		//HPの画像パス
 
 // プレイヤーの画像サイズ
 const int HEART_SIZE = 32; // ハート
@@ -44,6 +45,8 @@ private:
 	int invincibletimeCnt; // プレイヤーの無敵時間カウント用
 	bool isActive; // プレイヤーが生きているか
 	bool isDraw; // 描画されるか 
+
+	int HpHundle;	// HPの装飾ハンドル
 
 	// HPバーの色保存用
 	unsigned int Cr;

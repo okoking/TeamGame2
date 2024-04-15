@@ -20,6 +20,7 @@ void Player::Init()
 	//プレイヤーの画像ハンドルの初期化
 	HeartImageHundle = -1;
 	ShieldImageHundle = -1;
+	HpHundle = -1;
 
 	// HP
 	Hp = PLAYER_HP;
@@ -38,6 +39,7 @@ void Player::Load()
 {
 	HeartImageHundle = LoadGraph(HEART_PATH);
 	ShieldImageHundle = LoadGraph(SHIELD_PATH);
+	HpHundle = LoadGraph(HP_PATH);
 }
 
 //プレイヤーの通常処理
@@ -66,10 +68,12 @@ void Player::Draw()
 	if (isDraw) { // 描画されている判定なら
 		DrawRotaGraph((int)HeartposX, (int)HeartposY, 1.0f, 0.0f, HeartImageHundle, true); // ハート
 	}
-
+	
 	DrawRotaGraph((int)ShieldposX, (int)ShieldposY, 1.0f, Shieldangle / 180 * 3.14, ShieldImageHundle, true); // 盾
 
-	DrawBox(0 , 0 , Hp * 64, 32 , Cr, TRUE);    // 四角形を描画
+	DrawGraph(0, 0, HpHundle, true); // HP
+
+	DrawBox(15, 30, Hp * 62, 84, Cr, TRUE);    // 四角形を描画
 }
 
 //プレイヤーの終了処理
