@@ -28,10 +28,10 @@ void Title::Init()
 	//}
 	//cloudY = -20;
 
-	////透明度設定
+	//透明度設定
 	//fade[0] = 0;
-	//fade[1] = 0;
-	//lighting = true;
+	fade[1] = 0;
+	lighting = true;
 
 	//進行度
 	progress = 1;
@@ -75,27 +75,27 @@ void Title::Step()
 
 	case 1:	//入力待ち
 
-		////UIの点滅
-		////現れる
-		//if (lighting)
-		//{
-		//	fade[1] += 5;
+		//UIの点滅
+		//現れる
+		if (lighting)
+		{
+			fade[1] += 5;
 
-		//	if (fade[1] >= 255)
-		//	{
-		//		lighting = false;
-		//	}
-		//}
-		////消える
-		//else
-		//{
-		//	fade[1] -= 5;
+			if (fade[1] >= 255)
+			{
+				lighting = false;
+			}
+		}
+		//消える
+		else
+		{
+			fade[1] -= 5;
 
-		//	if (fade[1] <= 0)
-		//	{
-		//		lighting = true;
-		//	}
-		//}
+			if (fade[1] <= 0)
+			{
+				lighting = true;
+			}
+		}
 
 		gearAngle+=0.1;
 		lineX += 0.1;
@@ -159,8 +159,6 @@ void Title::Step()
 //描画
 void Title::Draw()//800 600
 {	
-
-
 	//タイトル下地
 	DrawGraph(0, 0, imageHandle[TITLE_TITLE], true);	
 
@@ -179,6 +177,9 @@ void Title::Draw()//800 600
 	//タイトル下の線 座標、左上座標、描画するサイズ、ハンドル、透明化、画像反転有無  421 43
 	//DrawRectGraph(210, 344, lineX, lineY, lineW,lineH,imageHandle[TITLE_LINE], false,false);
 	DrawRectGraph(210, 344, 421, 43, 421,43,imageHandle[TITLE_LINE], true,false);
+	DrawGraph(210, 310, imageHandle[TITLE_LINE], true);
+	DrawRotaGraph(280, 315, 1.0f,0.0f,imageHandle[TITLE_GEARHARF], true);
+
 
 	//	//fadeで透明度変更
 	//	SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade[0]);
@@ -186,11 +187,11 @@ void Title::Draw()//800 600
 	//	//表示を元に戻す
 	//	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	//
-	//	//fadeで透明度変更
-	//	SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade[1]);
-	//	DrawGraphF(0, 0, imageHandle[TITLE_START], true);	//入力待ち
-	//	//表示を元に戻す
-	//	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+		//fadeで透明度変更
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade[1]);
+		DrawGraphF(300, 370, imageHandle[TITLE_START], true);	//入力待ち
+		//表示を元に戻す
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
 }
 
