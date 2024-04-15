@@ -15,6 +15,7 @@ enum SE_TYPE
 	SE_SYSTEM,		//システム
 	SE_TIME_LIMIT,	//時間制限
 	SE_FINISH,		//ゲーム終了
+	SE_GUARD,		//ガード
 
 	SE_MAX_NUM
 };

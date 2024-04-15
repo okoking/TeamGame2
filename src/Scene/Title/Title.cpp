@@ -158,11 +158,11 @@ void Title::Draw()
 {
 	DrawGraph(0, 0, imageHandle[TITLE_TITLE], true);	//タイトル下地
 	DrawRotaGraph(-122, -106,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR1], true);
-	DrawRotaGraph(-42, 410,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR2], true);	
-	DrawRotaGraph(578, 673,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR2], true);	
-	DrawRotaGraph(-42, 410,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	
-	DrawRotaGraph(34, 512,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	
-	DrawRotaGraph(92, 429,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	
+	DrawRotaGraph(-42, 410,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR2], true);
+	DrawRotaGraph(578, 673, 1.0f, (int)gearAngle, imageHandle[TITLE_GEAR2], true);
+	DrawRotaGraph(-42, 410,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);
+	DrawRotaGraph(34, 512,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);
+	DrawRotaGraph(92, 429,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);
 
 	DrawRotaGraph(578, 672,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	
 	DrawRotaGraph(733, 556,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	

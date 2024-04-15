@@ -27,6 +27,7 @@ char seSoundPath[SE_MAX_NUM][255] =
 	"data/sound/se/system.mp3",		//システム
 	"data/sound/se/timeLimit.mp3",	//時間制限
 	"data/sound/se/finish.mp3",		//ゲーム終了
+	"data/sound/se/guard.mp3",		//ガード
 };
 
 //音量
@@ -35,6 +36,7 @@ int soundVolume_se[SE_MAX_NUM] =
 	80,			//システム
 	100,		//時間制限
 	70,			//ゲーム終了
+	50,			//ガード
 };
 
 //サウンドまとめ初期化

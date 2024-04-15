@@ -88,6 +88,8 @@ void Play::ArrowCollision(SHIELD_ANGLE ShieldAngle)
 							player.Damaged();
 						}
 						else {
+							//se
+							Sound::Se::Play(SE_GUARD);
 							player.AddGuardCnt();
 						}
 						arrow.ResetArrow(ArrowIndex);
@@ -104,6 +106,8 @@ void Play::ArrowCollision(SHIELD_ANGLE ShieldAngle)
 							player.Damaged();
 						}
 						else {
+							//se
+							Sound::Se::Play(SE_GUARD);
 							player.AddGuardCnt();
 						}
 						arrow.ResetArrow(ArrowIndex);
@@ -120,6 +124,8 @@ void Play::ArrowCollision(SHIELD_ANGLE ShieldAngle)
 							player.Damaged();
 						}
 						else {
+							//se
+							Sound::Se::Play(SE_GUARD);
 							player.AddGuardCnt();
 						}
 						arrow.ResetArrow(ArrowIndex);
@@ -136,6 +142,8 @@ void Play::ArrowCollision(SHIELD_ANGLE ShieldAngle)
 							player.Damaged();
 						}
 						else {
+							//se
+							Sound::Se::Play(SE_GUARD);
 							player.AddGuardCnt();
 						}
 						arrow.ResetArrow(ArrowIndex);
@@ -153,6 +161,8 @@ void Play::ArrowCollision(SHIELD_ANGLE ShieldAngle)
 						player.Damaged();
 					}
 					else {
+						//se
+						Sound::Se::Play(SE_GUARD);
 						player.AddGuardCnt();
 					}
 					arrow.ResetArrow(ArrowIndex);
@@ -167,6 +177,8 @@ void Play::ArrowCollision(SHIELD_ANGLE ShieldAngle)
 						player.Damaged();
 					}
 					else {
+						//se
+						Sound::Se::Play(SE_GUARD);
 						player.AddGuardCnt();
 					}
 					arrow.ResetArrow(ArrowIndex);
@@ -181,6 +193,8 @@ void Play::ArrowCollision(SHIELD_ANGLE ShieldAngle)
 						player.Damaged();
 					}
 					else {
+						//se
+						Sound::Se::Play(SE_GUARD);
 						player.AddGuardCnt();
 					}
 					arrow.ResetArrow(ArrowIndex);
@@ -195,6 +209,8 @@ void Play::ArrowCollision(SHIELD_ANGLE ShieldAngle)
 						player.Damaged();
 					}
 					else {
+						//se
+						Sound::Se::Play(SE_GUARD);
 						player.AddGuardCnt();
 					}
 					arrow.ResetArrow(ArrowIndex);
