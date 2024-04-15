@@ -23,7 +23,7 @@ void Play::Load()
 	//‰æ‘œ“Ç‚İ‚İ
 	//”wŒiŠÖ˜A
 	backgroundHandle = LoadGraph(BACKGROUND_PATH);	//”wŒi
-	
+	ImgHP = LoadGraph("data/play/HP.png");
 	//ƒvƒŒƒCƒ„[ŠÖ˜A
 	player.Load();									//ƒvƒŒƒCƒ„[‰æ‘œ‚Ì“Ç‚İ‚İ
 
@@ -47,6 +47,7 @@ void Play::Draw()
 {
 	//”wŒi•`‰æ
 	//DrawGraph(0, 0, backgroundHandle, true);	//”wŒi
+	//DrawGraph(0, 0, ImgHP, true);
 
 	player.Draw();		//ƒvƒŒƒCƒ„[‰æ‘œ‚Ì•`‰æ
 	arrow.Draw();		//–î‚Ì•`‰æ

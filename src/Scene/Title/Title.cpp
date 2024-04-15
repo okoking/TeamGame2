@@ -157,19 +157,10 @@ void Title::Step()
 }
 
 //描画
-<<<<<<< HEAD
-void Title::Draw()
-{
-	DrawGraph(0, 0, imageHandle[TITLE_TITLE], true);	//タイトル下地
-	DrawRotaGraph(-122, -106,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR1], true);
-	DrawRotaGraph(-42, 410,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR2], true);
-	DrawRotaGraph(578, 673, 1.0f, (int)gearAngle, imageHandle[TITLE_GEAR2], true);
-	DrawRotaGraph(-42, 410,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);
-	DrawRotaGraph(34, 512,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);
-	DrawRotaGraph(92, 429,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);
-=======
 void Title::Draw()//800 600
 {	
+
+
 	//タイトル下地
 	DrawGraph(0, 0, imageHandle[TITLE_TITLE], true);	
 
@@ -180,7 +171,6 @@ void Title::Draw()//800 600
 	DrawRotaGraph(-42, 410,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR2], true);	
 	DrawRotaGraph(34, 512,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	
 	DrawRotaGraph(92, 429,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	
->>>>>>> 32f5009e637dd2695ea81e6d16b05cfab33da0fd
 
 	//右下
 	DrawRotaGraph(760, 460,1.0f, (int)gearAngle*-1, imageHandle[TITLE_GEAR3], true);	
@@ -190,17 +180,18 @@ void Title::Draw()//800 600
 	//DrawRectGraph(210, 344, lineX, lineY, lineW,lineH,imageHandle[TITLE_LINE], false,false);
 	DrawRectGraph(210, 344, 421, 43, 421,43,imageHandle[TITLE_LINE], true,false);
 
-//	//fadeで透明度変更
-//	SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade[0]);
-//	DrawGraphF(0, titleY, imageHandle[TITLE_TITLE], true);	//タイトル
-//	//表示を元に戻す
-//	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
-//
-//	//fadeで透明度変更
-//	SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade[1]);
-//	DrawGraphF(0, 0, imageHandle[TITLE_START], true);	//入力待ち
-//	//表示を元に戻す
-//	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+	//	//fadeで透明度変更
+	//	SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade[0]);
+	//	DrawGraphF(0, titleY, imageHandle[TITLE_TITLE], true);	//タイトル
+	//	//表示を元に戻す
+	//	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+	//
+	//	//fadeで透明度変更
+	//	SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade[1]);
+	//	DrawGraphF(0, 0, imageHandle[TITLE_START], true);	//入力待ち
+	//	//表示を元に戻す
+	//	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
 }
 
 //終了処理

@@ -16,6 +16,7 @@ private:
 	Arrow arrow;	// 矢
 
 	int backgroundHandle;	//背景画像ハンドル
+	int ImgHP;
 
 public:
 	//プレイシーンの初期化
