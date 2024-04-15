@@ -210,7 +210,7 @@ void Title::Draw()//800 600
 	DrawRotaGraph(760, 460,1.0f, (int)gearAngle*-1, imageHandle[TITLE_GEAR3], true);	
 	DrawRotaGraph(663, 576,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	
 
-	DrawRotaGraph(400, 400, 1.0f, 0.0f, imageHandle[TITLE_EASY+g_GameModeID], true);
+	DrawRotaGraph(400, 440, 1.0f, 0.0f, imageHandle[TITLE_EASY+g_GameModeID], true);
 
 	//タイトル下の線 座標、左上座標、描画するサイズ、ハンドル、透明化、画像反転有無  421 43
 	//DrawRectGraph(210, 344, lineX, lineY, lineW,lineH,imageHandle[TITLE_LINE], false,false);
