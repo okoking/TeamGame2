@@ -24,7 +24,15 @@ enum SCENE_ID
 
 };
 
+enum GAME_MODE
+{
+	GAME_MODE_EASY=0,	// ÉmÅ[É}Éã
+	GAME_MODE_NORMAL,
+	GAME_MODE_HARD,
+
+	GAME_MODE_NUM,
+};
 extern int Score;
 
 extern SCENE_ID g_CurrentSceneID;
-
+extern GAME_MODE g_GameModeID;

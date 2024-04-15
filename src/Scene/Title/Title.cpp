@@ -6,6 +6,9 @@
 
 SCENE_ID g_CurrentSceneID;	//シーン変数
 
+//ゲームモード
+GAME_MODE g_GameModeID;
+
 //初期化
 void Title::Init()
 {
@@ -44,6 +47,9 @@ void Title::Init()
 
 	//通常処理に移行
 	g_CurrentSceneID = SCENE_ID_LOOP_TITLE;
+
+	//ゲームモードを初期化
+	g_GameModeID = GAME_MODE_EASY;
 }
 
 //通常処理
@@ -97,11 +103,11 @@ void Title::Step()
 		//	}
 		//}
 
-		gearAngle+=0.1;
-		lineX += 0.1;
-		lineY += 0.1;
-		lineW += 0.1;
-		lineH += 0.1;
+		gearAngle+=0.1f;
+		lineX += 0.1f;
+		lineY += 0.1f;
+		lineW += 0.1f;
+		lineH += 0.1f;
 
 		//スペースキーで画面変化
 		if (Input::Key::Push(KEY_INPUT_SPACE))
@@ -113,6 +119,25 @@ void Title::Step()
 			g_CurrentSceneID = SCENE_ID_FIN_TITLE;
 		}
 
+		//矢印キーで状態変化
+		if (g_GameModeID != GAME_MODE_EASY) {
+			if (Input::Key::Push(KEY_INPUT_LEFT))
+			{
+				if(g_GameModeID== GAME_MODE_HARD)
+					g_GameModeID= GAME_MODE_NORMAL;
+				else
+					g_GameModeID = GAME_MODE_EASY;
+			}
+		}
+		if (g_GameModeID != GAME_MODE_HARD) {
+			if (Input::Key::Push(KEY_INPUT_RIGHT))
+			{
+				if (g_GameModeID == GAME_MODE_EASY)
+					g_GameModeID = GAME_MODE_NORMAL;
+				else
+					g_GameModeID = GAME_MODE_HARD;
+			}
+		}
 		break;
 
 
@@ -157,17 +182,17 @@ void Title::Step()
 }
 
 //描画
-<<<<<<< HEAD
-void Title::Draw()
-{
-	DrawGraph(0, 0, imageHandle[TITLE_TITLE], true);	//タイトル下地
-	DrawRotaGraph(-122, -106,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR1], true);
-	DrawRotaGraph(-42, 410,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR2], true);
-	DrawRotaGraph(578, 673, 1.0f, (int)gearAngle, imageHandle[TITLE_GEAR2], true);
-	DrawRotaGraph(-42, 410,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);
-	DrawRotaGraph(34, 512,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);
-	DrawRotaGraph(92, 429,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);
-=======
+//void Title::Draw()
+//{
+//	DrawGraph(0, 0, imageHandle[TITLE_TITLE], true);	//タイトル下地
+//	DrawRotaGraph(-122, -106, 1.0f, (int)gearAngle, imageHandle[TITLE_GEAR1], true);
+//	DrawRotaGraph(-42, 410, 1.0f, (int)gearAngle, imageHandle[TITLE_GEAR2], true);
+//	DrawRotaGraph(578, 673, 1.0f, (int)gearAngle, imageHandle[TITLE_GEAR2], true);
+//	DrawRotaGraph(-42, 410, 1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);
+//	DrawRotaGraph(34, 512, 1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);
+//	DrawRotaGraph(92, 429, 1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);
+//}
+
 void Title::Draw()//800 600
 {	
 	//タイトル下地
@@ -180,11 +205,12 @@ void Title::Draw()//800 600
 	DrawRotaGraph(-42, 410,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR2], true);	
 	DrawRotaGraph(34, 512,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	
 	DrawRotaGraph(92, 429,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	
->>>>>>> 32f5009e637dd2695ea81e6d16b05cfab33da0fd
 
 	//右下
 	DrawRotaGraph(760, 460,1.0f, (int)gearAngle*-1, imageHandle[TITLE_GEAR3], true);	
 	DrawRotaGraph(663, 576,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	
+
+	DrawRotaGraph(400, 400, 1.0f, 0.0f, imageHandle[TITLE_EASY+g_GameModeID], true);
 
 	//タイトル下の線 座標、左上座標、描画するサイズ、ハンドル、透明化、画像反転有無  421 43
 	//DrawRectGraph(210, 344, lineX, lineY, lineW,lineH,imageHandle[TITLE_LINE], false,false);

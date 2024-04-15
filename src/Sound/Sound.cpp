@@ -28,6 +28,7 @@ char seSoundPath[SE_MAX_NUM][255] =
 	"data/sound/se/timeLimit.mp3",	//時間制限
 	"data/sound/se/finish.mp3",		//ゲーム終了
 	"data/sound/se/guard.mp3",		//ガード
+	"data/sound/se/damage.mp3",		//ダメージ
 };
 
 //音量
@@ -37,6 +38,7 @@ int soundVolume_se[SE_MAX_NUM] =
 	100,		//時間制限
 	70,			//ゲーム終了
 	50,			//ガード
+	100,		//ダメージ
 };
 
 //サウンドまとめ初期化

@@ -45,7 +45,9 @@ void Arrow::Init()
 
 		arrowInfo[ArrowIndex].ShotInterval = GetRand(ARROW_MAX_INTERVAL);
 
-		arrowInfo[ArrowIndex].arrowtype = (ARROW_TYPE)GetRand(2);
+		arrowInfo[ArrowIndex].arrowtype = (ARROW_TYPE)GetRand((int)g_GameModeID);
+
+		//arrowInfo[ArrowIndex].arrowtype = (ARROW_TYPE)GetRand(2);
 
 		arrowInfo[ArrowIndex].isInversion = false; // –î”½“]’†ƒtƒ‰ƒO
 		arrowInfo[ArrowIndex].ShotTimeCnt = 0;
@@ -209,7 +211,9 @@ void Arrow::Fin()
 void Arrow::ResetArrow(int _index)
 {
 	arrowInfo[_index].angle = (ARROW_ANGLE)GetRand(3);
-	arrowInfo[_index].arrowtype = (ARROW_TYPE)GetRand(2);
+	arrowInfo[_index].arrowtype = (ARROW_TYPE)GetRand((int)g_GameModeID);
+
+	//arrowInfo[_index].arrowtype = (ARROW_TYPE)GetRand(2);
 
 	arrowInfo[_index].ShotInterval = GetRand(ARROW_MAX_INTERVAL);
 	arrowInfo[_index].ShotTimeCnt = 0;

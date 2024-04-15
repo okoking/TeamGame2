@@ -120,6 +120,9 @@ void Player::Damaged()
 {
 	// –³“G’†‚Å‚È‚¢‚È‚ç
 	if (invincibletimeCnt == PLAYER_INVINCIBLE_TIME) {
+		//se
+		Sound::Se::Play(SE_DAMAGE);
+
 		// –³“GŽžŠÔ‚ðƒŠƒZƒbƒg
 		invincibletimeCnt = 0;
 		// HP‚ðŒ¸‚ç‚·

@@ -10,6 +10,9 @@ enum TITLE_IMAGE_NUM
 	TITLE_GEAR2,
 	TITLE_GEAR3,
 	TITLE_LINE,		//ü
+	TITLE_EASY,		//easy
+	TITLE_NORMAL,	//normal
+	TITLE_HARD,		//hard
 
 	TITLE_IMAGE_MAX_NUM,	//‰æ‘œ”
 };
@@ -23,6 +26,10 @@ const char TITLE_IMAGE_PATH[TITLE_IMAGE_MAX_NUM][255] =
 	"data/title/gear3.png",	//•Ô3
 	"data/title/sen.png",	//ü
 	
+	"data/title/easy.png",	//easy
+	"data/title/normal.png",//normal
+	"data/title/hard.png",	//hard 
+
 	//"data/title/start.png",	//“ü—Í‘Ò‚¿
 };
 
