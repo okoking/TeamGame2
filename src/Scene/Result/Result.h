@@ -12,7 +12,7 @@ enum RESULT_IMAGE
 //‰æ‘œ‚ÌƒpƒX
 const char RESULT_IMAGE_PATH[RESULT_IMAGE_MAX_NUM][255] =
 {
-	"data/result/2.png",	//”wŒi
+	"data/result/result.png",	//”wŒi
 	//"data/result/finish.png",	//•¶Žš
 };
 

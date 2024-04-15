@@ -41,12 +41,7 @@ class Title
 private:
 	int imageHandle[TITLE_IMAGE_MAX_NUM];	//‰æ‘œƒnƒ“ƒhƒ‹
 
-	//float seaY;	//ŠC‚x
-	//float jettyY;	//V‹´‚x
-	//float cloudX[4][2];	//‰_‚w
-	//float cloudY;	//‰_‚w
-	//float titleY;	//ƒ^ƒCƒgƒ‹‚x
-
+	
 	int fade[2];	//“§–¾“xFƒ^ƒCƒgƒ‹ “ü—Í‘Ò‚¿
 
 	bool lighting;	//“ü—Í‘Ò‚¿‚Ì“_–Å

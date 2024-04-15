@@ -33,57 +33,11 @@ void Rasult::Step()
 	{
 	case 0:	//スコア表示
 
-		////スコアの透明度
-		//if (fade[0] >= 255)
-		//{
-		//	fade[0] = 255;
-		//}
-		//else
-		//{
-		//	fade[0] += 2;
-		//}
-
-		////スコアの座標
-		//if (y >= 120)
-		//{
-		//	y = 120;
-		//}
-		//else
-		//{
-		//	y += 1;
-		//}
-
-		////以上が指定通りなら進行
-		//if (fade[0] == 255 && y == 120)
-		//{
-		//	progress++;
-		//}
 
 		break;
 
 	case 1:	//入力待ち
 
-		////点滅
-		////点く
-		//if (lighting)
-		//{
-		//	fade[1] += 5;
-
-		//	if (fade[1] >= 255)
-		//	{
-		//		lighting = false;
-		//	}
-		//}
-		////消える
-		//else
-		//{
-		//	fade[1] -= 5;
-
-		//	if (fade[1] <= 0)
-		//	{
-		//		lighting = true;
-		//	}
-		//}
 
 		//左クリックで以下
 		if (Input::Key::Push(KEY_INPUT_SPACE))
@@ -110,24 +64,13 @@ void Rasult::Draw()
 	//背景描画
 	DrawGraph(0, 0, imageHandle[RESULT_BACK_GROUND], true);
 
-	////fadeで透明度変更
-	//SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade[0]);
 	//文字の大きさを変更
 	SetFontSize(60);
-	DrawFormatString(200, 310, GetColor(0, 0, 0), "スコア:%d", Score);
+	DrawFormatString(500, 300, GetColor(255, 255, 255), "%d", Score);
 	////文字の大きさを変更
 	//SetFontSize(80);
 
-	////文字の大きさを元に戻す
-	//SetFontSize(20);
-	////表示を元に戻す
-	//SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
-
-	////fadeで透明度変更
-	//SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade[1]);
-	//DrawGraphF(0, 0, imageHandle[RESULT_FINISH], true);	//タイトル
-	////表示を元に戻す
-	//SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+	
 }
 
 //終了処理
