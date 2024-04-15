@@ -69,7 +69,7 @@ void Player::Draw()
 
 	DrawRotaGraph((int)ShieldposX, (int)ShieldposY, 1.0f, Shieldangle / 180 * 3.14, ShieldImageHundle, true); // 盾
 
-	DrawBox(0, 0, Hp * 64, 32, Cr, TRUE);    // 四角形を描画
+	DrawBox(0 , 0 , Hp * 64, 32 , Cr, TRUE);    // 四角形を描画
 }
 
 //プレイヤーの終了処理

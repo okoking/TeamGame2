@@ -2,7 +2,7 @@
 #include "DxLib.h"
 #include "../Input/Input.h"
 
-const char HEART_PATH[] = {"data/play/kari_heart.png"};		//ハートの画像パス
+const char HEART_PATH[] = {"data/play/kari_heart2.png"};		//ハートの画像パス
 const char SHIELD_PATH[] = { "data/play/fishingpowerbar.png" };		//シールドの画像パス
 
 // プレイヤーの画像サイズ
