@@ -16,7 +16,8 @@ void Play::Init()
 
 	//音
 	Sound::Bgm::Play(BGM_PLAY);
-	
+	Sound::Bgm::SetVolume(BGM_PLAY, 50);
+
 	//プレイシーンの通常処理に遷移
 	g_CurrentSceneID = SCENE_ID_LOOP_PLAY;
 }

@@ -20,9 +20,13 @@ void Title::Init()
 
 	//bgm
 	Sound::Bgm::Play(BGM_TITLE);
-
+	Sound::Bgm::SetVolume(BGM_TITLE,50);
 	//歯車回転
 	gearAngle = 0.0f;
+
+	//透過点滅
+	fade[0] = 0;
+	fade[1] = 0;
 
 	//通常処理に移行
 	g_CurrentSceneID = SCENE_ID_LOOP_TITLE;
@@ -37,8 +41,13 @@ void Title::Step()
 	//現れる
 	if (lighting)
 	{
-		fade[1] += 5;
+		fade[0] += 4;
+		fade[1] += 7;
 
+		if (fade[0] >= 255)
+		{
+			lighting = false;
+		}
 		if (fade[1] >= 255)
 		{
 			lighting = false;
@@ -47,8 +56,13 @@ void Title::Step()
 	//消える
 	else
 	{
-		fade[1] -= 5;
+		fade[0] -= 4;
+		fade[1] -= 7;
 
+		if (fade[0] <= 0)
+		{
+			lighting = true;
+		}
 		if (fade[1] <= 0)
 		{
 			lighting = true;
@@ -72,6 +86,8 @@ void Title::Step()
 	if (g_GameModeID != GAME_MODE_EASY) {
 		if (Input::Key::Push(KEY_INPUT_LEFT))
 		{
+			//se
+			Sound::Se::Play(SE_SYSTEM);
 			if(g_GameModeID== GAME_MODE_HARD)
 				g_GameModeID= GAME_MODE_NORMAL;
 			else
@@ -81,6 +97,8 @@ void Title::Step()
 	if (g_GameModeID != GAME_MODE_HARD) {
 		if (Input::Key::Push(KEY_INPUT_RIGHT))
 		{
+			//se
+			Sound::Se::Play(SE_SYSTEM);
 			if (g_GameModeID == GAME_MODE_EASY)
 				g_GameModeID = GAME_MODE_NORMAL;
 			else
@@ -100,12 +118,12 @@ void Title::Draw()//800 600
 	DrawRotaGraph(15, 30,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR1], true);
 
 	//左下
-	DrawRotaGraph(0, 450,0.5, (int)gearAngle, imageHandle[TITLE_GEAR2], true);	
-	DrawRotaGraph(34, 552, 0.5, (int)gearAngle, imageHandle[TITLE_GEAR2], true);
+	DrawRotaGraph(0, 450,0.5, (int)gearAngle*-1+0.4, imageHandle[TITLE_GEAR2], true);	
+	DrawRotaGraph(34, 552, 0.5, (int)gearAngle*-1+0.1, imageHandle[TITLE_GEAR2], true);
 	DrawRotaGraph(92, 479, 0.5, (int)gearAngle, imageHandle[TITLE_GEAR2], true);
 
 	//右下
-	DrawRotaGraph(760, 460,1.0f, (int)gearAngle*-1, imageHandle[TITLE_GEAR3], true);	
+	DrawRotaGraph(760, 460,1.0f, (int)gearAngle*-1+0.5, imageHandle[TITLE_GEAR3], true);	
 	DrawRotaGraph(663, 576,1.0f, (int)gearAngle, imageHandle[TITLE_GEAR3], true);	
 
 	DrawRotaGraph(400, 440, 1.0f, 0.0f, imageHandle[TITLE_EASY+g_GameModeID], true);
@@ -114,9 +132,28 @@ void Title::Draw()//800 600
 	DrawGraph(210, 310, imageHandle[TITLE_LINE], true);
 	//DrawRotaGraph(400, 380, 1.0f,0.0f,imageHandle[TITLE_GEARHARF], true);
 
+	//矢印
+	if (g_GameModeID != GAME_MODE_NORMAL) {
+		//fadeで透明度変更
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade[1]);
+		DrawRotaGraph(250, 440, 0.5, 0, imageHandle[TITLE_ARROW2], true);
+		DrawRotaGraph(540, 440, 0.5, 0.0f, imageHandle[TITLE_ARROW], true);
+		//表示を元に戻す
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
+	}
+	else {
+		//fadeで透明度変更
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade[1]);
+		DrawRotaGraph(200, 440, 0.5, 0, imageHandle[TITLE_ARROW2], true);
+		DrawRotaGraph(590, 440, 0.5, 0.0f, imageHandle[TITLE_ARROW], true);
+		//表示を元に戻す
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
+	}
 
 	//fadeで透明度変更
-	SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade[1]);
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, fade[0]);
 	DrawGraphF(300, 370, imageHandle[TITLE_START], true);	//入力待ち
 	//表示を元に戻す
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
