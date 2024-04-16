@@ -45,7 +45,8 @@ void Rasult::Draw()
 	//•¶š‚Ì‘å‚«‚³‚ğ•ÏX
 	SetFontSize(60);
 	DrawFormatString(500, 300, GetColor(255, 255, 255), "%d", Score);
-	////•¶š‚Ì‘å‚«‚³‚ğ•ÏX
+	
+	//•¶š‚Ì‘å‚«‚³‚ğ•ÏX
 	//SetFontSize(80);
 	
 }
