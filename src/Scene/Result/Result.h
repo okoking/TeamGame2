@@ -4,7 +4,8 @@
 enum RESULT_IMAGE
 {
 	RESULT_BACK_GROUND,	//”wŒi
-	//RESULT_FINISH,	//•¶š
+	RESULT_GAER1,		//•Ô
+	RESULT_GAER2,		//•Ô
 
 	RESULT_IMAGE_MAX_NUM,	//Å‘å”
 };
@@ -13,7 +14,8 @@ enum RESULT_IMAGE
 const char RESULT_IMAGE_PATH[RESULT_IMAGE_MAX_NUM][255] =
 {
 	"data/result/result.png",	//”wŒi
-	//"data/result/finish.png",	//•¶š
+	"data/result/gear2.png",	//”wŒi
+	"data/result/gear3.png",	//”wŒi
 };
 
 class Rasult
@@ -27,6 +29,7 @@ private:
 	bool lighting;	//“ü—Í‘Ò‚¿‚Ì“_–Å
 
 	int progress;	//is“x
+	float RgearAngle;
 
 public:
 	//‰Šú‰»

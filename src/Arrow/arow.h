@@ -1,7 +1,7 @@
 #pragma once
 #include "../Player/Player.h"
 
-#define ARROW_MAX_NUM	(3)						//矢の最大数（ハンドルの数）
+#define ARROW_MAX_NUM	(6)						//矢の最大数（ハンドルの数）
 
 // 矢の速度
 const float ARROW_SPEED = 4.0f;

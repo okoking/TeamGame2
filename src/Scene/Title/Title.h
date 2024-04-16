@@ -14,6 +14,8 @@ enum TITLE_IMAGE_NUM
 	TITLE_EASY,		//easy
 	TITLE_NORMAL,	//normal
 	TITLE_HARD,		//hard
+	TITLE_ARROW,	//難易度選択用やじるし
+	TITLE_ARROW2,	//難易度選択用やじるし
 
 	TITLE_IMAGE_MAX_NUM,	//画像数
 };
@@ -32,6 +34,9 @@ const char TITLE_IMAGE_PATH[TITLE_IMAGE_MAX_NUM][255] =
 	"data/title/easy.png",	//easy
 	"data/title/normal.png",//normal
 	"data/title/hard.png",	//hard 
+	"data/title/sankaku.png",//三角
+	"data/title/sankaku02.png",//三角
+
 
 	//"data/title/start.png",	//入力待ち
 };

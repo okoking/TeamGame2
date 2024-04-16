@@ -12,10 +12,11 @@ void Rasult::Init()
 		//画像読み込み
 		imageHandle[i] = LoadGraph(RESULT_IMAGE_PATH[i]);
 	}
-	progress = 1;
+	RgearAngle = 0;
 
 	//bgm
 	Sound::Bgm::Play(BGM_RESULT);
+	Sound::Bgm::SetVolume(BGM_RESULT, 50);
 
 	//通常処理に移行
 	g_CurrentSceneID = SCENE_ID_LOOP_RESULT;
@@ -24,6 +25,9 @@ void Rasult::Init()
 //通常処理
 void Rasult::Step()
 {
+	//ギアの回転
+	RgearAngle += 0.1;
+
 	//左クリックで以下
 	if (Input::Key::Push(KEY_INPUT_SPACE))
 	{
@@ -41,6 +45,12 @@ void Rasult::Draw()
 {
 	//背景描画
 	DrawGraph(0, 0, imageHandle[RESULT_BACK_GROUND], true);
+
+	//歯車
+	DrawRotaGraph(10, 10, 0.7, (int)RgearAngle, imageHandle[RESULT_GAER1], true);
+	DrawRotaGraph(-3, 90, 0.3, (int)RgearAngle*-1, imageHandle[RESULT_GAER1], true);
+	DrawRotaGraph(750, 50, 1.1, (int)RgearAngle, imageHandle[RESULT_GAER2], true);
+
 
 	//文字の大きさを変更
 	SetFontSize(60);
